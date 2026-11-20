@@ -1,6 +1,5 @@
 import { Clock, MapPin, Navigation, Phone, CheckCircle2 } from 'lucide-react'
-import { BRANCHES, mapsLink, waLink, wazeLink } from '../data/site'
-import { WhatsAppIcon } from '../components/Icons'
+import { BRANCHES, mapsLink, wazeLink } from '../data/site'
 
 export default function Branches() {
   return (
@@ -59,9 +58,6 @@ export default function Branches() {
                 </a>
                 <a href={`tel:${b.phone}`} className="btn-line !py-2.5 text-sm">
                   <Phone className="h-4 w-4" /> {b.phone}
-                </a>
-                <a href={waLink(`היי, שאלה לסניף ${b.city}`)} target="_blank" rel="noreferrer" className="btn-line !py-2.5 text-sm">
-                  <WhatsAppIcon className="h-4 w-4" /> וואטסאפ
                 </a>
               </div>
             </div>

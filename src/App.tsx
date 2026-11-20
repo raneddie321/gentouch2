@@ -4,7 +4,6 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import CartDrawer from './components/CartDrawer'
 import Toasts from './components/Toasts'
-import { WhatsAppIcon } from './components/Icons'
 import Home from './pages/Home'
 import Catalog from './pages/Catalog'
 import ProductPage from './pages/ProductPage'
@@ -14,7 +13,6 @@ import Branches from './pages/Branches'
 import Account from './pages/Account'
 import Info from './pages/Info'
 import NotFound from './pages/NotFound'
-import { waLink } from './data/site'
 
 function ScrollTop() {
   const { pathname } = useLocation()
@@ -50,15 +48,6 @@ export default function App() {
       <Footer />
       <CartDrawer />
       <Toasts />
-      <a
-        href={waLink()}
-        target="_blank"
-        rel="noreferrer"
-        aria-label="ייעוץ בוואטסאפ"
-        className="fixed bottom-5 left-5 z-50 grid h-14 w-14 place-items-center rounded-full border-2 border-ink bg-[#25D366] text-white shadow-hard transition-transform hover:-translate-y-0.5"
-      >
-        <WhatsAppIcon className="h-7 w-7" />
-      </a>
     </div>
   )
 }

@@ -154,16 +154,13 @@ export default function ProductPage() {
             </button>
           </div>
 
-          <a href={waLink(`היי, אשמח לייעוץ לגבי ${p.name}`)} target="_blank" rel="noreferrer" className="mt-4 flex items-center gap-3 rounded-2xl border border-[#25C565]/25 bg-[#25C565]/[0.07] p-4 transition hover:bg-[#25C565]/[0.12]">
-            <span className="grid h-10 w-10 place-items-center rounded-full bg-[#25C565] text-ink">
-              <WhatsAppIcon />
-            </span>
-            <span className="flex-1">
-              <span className="block text-sm font-bold">יש שאלה על המוצר?</span>
-              <span className="block text-xs text-mute">גיימר מהצוות יענה לכם בוואטסאפ תוך דקות</span>
-            </span>
-            <ChevronLeft className="h-5 w-5 text-mute" />
-          </a>
+          <p className="mt-4 text-sm text-ink-2">
+            יש שאלה על המוצר?{' '}
+            <a href={waLink(`היי, אשמח לייעוץ לגבי ${p.name}`)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 font-semibold underline underline-offset-4">
+              <WhatsAppIcon className="h-4 w-4 text-[#1FA855]" />
+              כתבו לנו בוואטסאפ
+            </a>
+          </p>
 
           <ul className="mt-6 grid gap-3 sm:grid-cols-2">
             {[

@@ -235,12 +235,6 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
             </Link>
           </div>
         </div>
-        <div className="border-t border-line p-4">
-          <a href={waLink()} target="_blank" rel="noreferrer" className="btn-line w-full">
-            <WhatsAppIcon className="h-5 w-5 text-[#1FA855]" />
-            ייעוץ בוואטסאפ
-          </a>
-        </div>
       </aside>
     </div>
   )

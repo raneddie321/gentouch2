@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Instagram, Youtube } from 'lucide-react'
 import Logo from './Logo'
-import { TikTokIcon, WhatsAppIcon } from './Icons'
-import { BRANCHES, SITE, mapsLink, waLink, wazeLink } from '../data/site'
+import { TikTokIcon } from './Icons'
+import { BRANCHES, SITE, mapsLink, wazeLink } from '../data/site'
 import { CATEGORIES } from '../data/categories'
 import { useStore } from '../context/StoreContext'
 
@@ -25,9 +25,6 @@ export default function Footer() {
             </Social>
             <Social href={SITE.social.instagram} label="דומינטור באינסטגרם">
               <Instagram className="h-5 w-5" />
-            </Social>
-            <Social href={waLink()} label="דומינטור בוואטסאפ">
-              <WhatsAppIcon className="h-5 w-5" />
             </Social>
           </div>
         </div>

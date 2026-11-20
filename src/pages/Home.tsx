@@ -259,10 +259,9 @@ function Lab() {
             <Link to="/repair#book" className="btn-go px-6 text-base">
               קביעת תור למעבדה
             </Link>
-            <a href={waLink('היי, יש לי תקלה ואשמח להערכת מחיר')} target="_blank" rel="noreferrer" className="btn border-2 border-white/40 px-5 text-base text-white hover:border-white">
-              <WhatsAppIcon className="h-5 w-5" />
-              שליחת תמונה של התקלה
-            </a>
+            <Link to="/repair" className="btn border-2 border-white/40 px-5 text-base text-white hover:border-white">
+              איך זה עובד
+            </Link>
           </div>
         </div>
 
