@@ -32,20 +32,20 @@ export default function Checkout() {
   if (order) {
     return (
       <div className="container-x py-16">
-        <div className="card mx-auto max-w-xl p-8 text-center sm:p-12">
-          <div className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-slime-500/15 ring-8 ring-slime-500/5">
-            <CheckCircle2 className="h-10 w-10 text-slime-500" />
+        <div className="panel mx-auto max-w-xl p-8 text-center sm:p-12">
+          <div className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-go-tint ring-8 ring-go-tint/50">
+            <CheckCircle2 className="h-10 w-10 text-go-deep" />
           </div>
-          <h1 className="mt-6 font-display text-3xl font-black">תודה {order.name}, ההזמנה התקבלה! 🎮</h1>
-          <p className="mt-2 text-mist-300">
-            מספר הזמנה: <b className="font-display text-white" dir="ltr">#{order.id}</b>
+          <h1 className="mt-6 h-display text-[52px]">תודה {order.name}, ההזמנה התקבלה!</h1>
+          <p className="mt-2 text-ink-2">
+            מספר הזמנה: <b className="font-display text-ink" dir="ltr">#{order.id}</b>
           </p>
-          <p className="mt-1 text-mist-400">סה״כ שולם: {formatPrice(order.total)}. אישור ופרטי מעקב נשלחו אליכם בוואטסאפ ובמייל.</p>
+          <p className="mt-1 text-mute">סה״כ שולם: {formatPrice(order.total)}. אישור ופרטי מעקב נשלחו אליכם בוואטסאפ ובמייל.</p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link to="/" className="btn-primary">
+            <Link to="/" className="btn-go">
               חזרה לעמוד הבית
             </Link>
-            <Link to="/catalog" className="btn-ghost">
+            <Link to="/catalog" className="btn-line">
               המשך קנייה
             </Link>
           </div>
@@ -57,10 +57,10 @@ export default function Checkout() {
   if (items.length === 0) {
     return (
       <div className="container-x py-20 text-center">
-        <ShoppingBag className="mx-auto h-14 w-14 text-mist-500" />
-        <h1 className="mt-4 font-display text-2xl font-black">הסל שלכם ריק</h1>
-        <p className="mt-1 text-mist-400">הוסיפו מוצרים כדי להמשיך לתשלום</p>
-        <Link to="/catalog" className="btn-primary mt-6">
+        <ShoppingBag className="mx-auto h-14 w-14 text-mute-2" />
+        <h1 className="mt-4 text-2xl font-bold">הסל שלכם ריק</h1>
+        <p className="mt-1 text-mute">הוסיפו מוצרים כדי להמשיך לתשלום</p>
+        <Link to="/catalog" className="btn-go mt-6">
           לקטלוג המלא
         </Link>
       </div>
@@ -101,9 +101,9 @@ export default function Checkout() {
 
   return (
     <div className="container-x py-8">
-      <h1 className="mb-2 font-display text-3xl font-black">קופה</h1>
-      <p className="mb-8 flex items-center gap-1.5 text-sm text-mist-400">
-        <Lock className="h-4 w-4 text-slime-500" /> תשלום מאובטח בתקן PCI-DSS
+      <h1 className="h-display mb-3 text-[56px]">קופה</h1>
+      <p className="mb-8 flex items-center gap-1.5 text-sm text-mute">
+        <Lock className="h-4 w-4 text-go-deep" /> תשלום מאובטח בתקן PCI-DSS
       </p>
       <form onSubmit={submit} noValidate className="grid gap-8 lg:grid-cols-[1fr_400px]">
         <div className="space-y-6">
@@ -124,11 +124,11 @@ export default function Checkout() {
             {delivery === 'pickup' ? (
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
                 {BRANCHES.map((b) => (
-                  <label key={b.id} className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition ${branch === b.id ? 'border-fire-500 bg-fire-500/[0.07]' : 'border-white/10 hover:border-white/20'}`}>
-                    <input type="radio" name="branch" checked={branch === b.id} onChange={() => setBranch(b.id)} className="mt-1 accent-fire-500" />
+                  <label key={b.id} className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition ${branch === b.id ? 'border-ink bg-go-tint' : 'border-line hover:border-ink'}`}>
+                    <input type="radio" name="branch" checked={branch === b.id} onChange={() => setBranch(b.id)} className="mt-1 accent-hot" />
                     <span>
                       <span className="block font-semibold">סניף {b.city}</span>
-                      <span className="block text-sm text-mist-400">{b.address}</span>
+                      <span className="block text-sm text-mute">{b.address}</span>
                     </span>
                   </label>
                 ))}
@@ -167,19 +167,19 @@ export default function Checkout() {
                 </div>
               </div>
             ) : (
-              <p className="rounded-xl border border-white/10 bg-ink-850 p-4 text-sm text-mist-300">לאחר לחיצה על "ביצוע הזמנה" תישלח בקשת תשלום לאפליקציית Bit במספר הטלפון שהזנתם.</p>
+              <p className="rounded-xl border border-line bg-stage p-4 text-sm text-ink-2">לאחר לחיצה על "ביצוע הזמנה" תישלח בקשת תשלום לאפליקציית Bit במספר הטלפון שהזנתם.</p>
             )}
-            <p className="mt-4 text-xs text-mist-500">אתר הדגמה — לא מתבצע חיוב אמיתי. אין להזין פרטי כרטיס אמיתיים.</p>
+            <p className="mt-4 text-xs text-mute-2">אתר הדגמה — לא מתבצע חיוב אמיתי. אין להזין פרטי כרטיס אמיתיים.</p>
           </Step>
         </div>
 
         <aside className="lg:sticky lg:top-[140px] lg:self-start">
-          <div className="card p-5">
-            <h2 className="mb-4 font-display text-lg font-extrabold">סיכום הזמנה</h2>
+          <div className="panel p-5">
+            <h2 className="mb-4 text-lg font-bold">סיכום הזמנה</h2>
             <ul className="max-h-72 space-y-3 overflow-y-auto pl-1">
               {items.map(({ product: p, qty }) => (
                 <li key={p.id} className="flex items-center gap-3">
-                  <span className="h-14 w-16 shrink-0 rounded-lg bg-ink-850">
+                  <span className="h-14 w-16 shrink-0 rounded-lg bg-stage">
                     <ProductArt id={`co-${p.id}`} kind={p.art} hue={p.hue} label={p.label} className="h-full w-full p-1" />
                   </span>
                   <span className="min-w-0 flex-1">
@@ -193,9 +193,9 @@ export default function Checkout() {
               ))}
             </ul>
 
-            <div className="mt-5 border-t border-white/5 pt-4">
+            <div className="mt-5 border-t border-line pt-4">
               {applied ? (
-                <div className="flex items-center justify-between rounded-xl bg-slime-500/10 px-3 py-2.5 text-sm text-slime-400">
+                <div className="flex items-center justify-between rounded-xl bg-go-tint px-3 py-2.5 text-sm text-go-deep">
                   <span className="inline-flex items-center gap-1.5">
                     <Tag className="h-4 w-4" /> {applied} — {COUPONS[applied].label}
                   </span>
@@ -215,27 +215,27 @@ export default function Checkout() {
                         setCouponErr('')
                       } else setCouponErr('קוד לא תקף (נסו CREW50 או DOM10)')
                     }}
-                    className="btn-ghost !px-4 !py-2.5 text-sm"
+                    className="btn-line !px-4 !py-2.5 text-sm"
                   >
                     הפעלה
                   </button>
                 </div>
               )}
-              {couponErr && <p className="mt-1.5 text-xs text-fire-300">{couponErr}</p>}
+              {couponErr && <p className="mt-1.5 text-xs text-hot">{couponErr}</p>}
             </div>
 
             <dl className="mt-5 space-y-2 text-sm">
               <Row k="סה״כ מוצרים" v={formatPrice(subtotal)} />
-              {discount > 0 && <Row k="הנחה" v={`-${formatPrice(discount)}`} className="text-slime-400" />}
+              {discount > 0 && <Row k="הנחה" v={`-${formatPrice(discount)}`} className="text-go-deep" />}
               <Row k="משלוח" v={shipFee ? formatPrice(shipFee) : 'חינם'} />
-              <div className="flex items-center justify-between border-t border-white/5 pt-3">
+              <div className="flex items-center justify-between border-t border-line pt-3">
                 <dt className="font-bold">לתשלום</dt>
-                <dd className="font-display text-2xl font-black">{formatPrice(total)}</dd>
+                <dd className="text-2xl font-bold">{formatPrice(total)}</dd>
               </div>
             </dl>
 
-            <label className="mt-4 flex items-start gap-2 text-xs text-mist-400">
-              <input type="checkbox" name="terms" className="mt-0.5 accent-fire-500" />
+            <label className="mt-4 flex items-start gap-2 text-xs text-mute">
+              <input type="checkbox" name="terms" className="mt-0.5 accent-hot" />
               <span>
                 קראתי ואני מאשר/ת את{' '}
                 <Link to="/info/terms" className="underline">
@@ -243,9 +243,9 @@ export default function Checkout() {
                 </Link>
               </span>
             </label>
-            {errors.terms && <p className="mt-1 text-xs text-fire-300">{errors.terms}</p>}
+            {errors.terms && <p className="mt-1 text-xs text-hot">{errors.terms}</p>}
 
-            <button disabled={loading} className="btn-primary mt-4 w-full text-base">
+            <button disabled={loading} className="btn-go mt-4 w-full text-base">
               {loading ? (
                 <span className="h-5 w-5 animate-spin rounded-full border-2 border-white/30 border-t-white" />
               ) : (
@@ -263,9 +263,9 @@ export default function Checkout() {
 
 function Step({ n, title, children }: { n: number; title: string; children: React.ReactNode }) {
   return (
-    <section className="card p-5 sm:p-6">
-      <h2 className="mb-5 flex items-center gap-3 font-display text-lg font-extrabold">
-        <span className="grid h-8 w-8 place-items-center rounded-full bg-fire-500/15 text-sm text-fire-400">{n}</span>
+    <section className="panel p-5 sm:p-6">
+      <h2 className="mb-5 flex items-center gap-3 text-lg font-bold">
+        <span className="grid h-8 w-8 place-items-center rounded-full bg-hot-tint text-sm text-hot">{n}</span>
         {title}
       </h2>
       {children}
@@ -279,9 +279,9 @@ export function Field({ name, label, err, className = '', ...rest }: { name: str
       <label className="label" htmlFor={`f-${name}`}>
         {label}
       </label>
-      <input id={`f-${name}`} name={name} className={`input ${err ? '!border-fire-500/70' : ''}`} aria-invalid={!!err} aria-describedby={err ? `e-${name}` : undefined} {...rest} />
+      <input id={`f-${name}`} name={name} className={`input ${err ? '!border-hot' : ''}`} aria-invalid={!!err} aria-describedby={err ? `e-${name}` : undefined} {...rest} />
       {err && (
-        <p id={`e-${name}`} className="mt-1 text-xs text-fire-300">
+        <p id={`e-${name}`} className="mt-1 text-xs text-hot">
           {err}
         </p>
       )}
@@ -291,11 +291,11 @@ export function Field({ name, label, err, className = '', ...rest }: { name: str
 
 function Choice({ active, onClick, icon: Icon, title, sub }: { active: boolean; onClick: () => void; icon: React.ComponentType<{ className?: string }>; title: string; sub: string }) {
   return (
-    <button type="button" onClick={onClick} aria-pressed={active} className={`flex items-center gap-3 rounded-xl border p-4 text-right transition ${active ? 'border-fire-500 bg-fire-500/[0.07]' : 'border-white/10 hover:border-white/20'}`}>
-      <Icon className={`h-5 w-5 shrink-0 ${active ? 'text-fire-400' : 'text-mist-400'}`} />
+    <button type="button" onClick={onClick} aria-pressed={active} className={`flex items-center gap-3 rounded-xl border p-4 text-right transition ${active ? 'border-ink bg-go-tint' : 'border-line hover:border-ink'}`}>
+      <Icon className={`h-5 w-5 shrink-0 ${active ? 'text-hot' : 'text-mute'}`} />
       <span>
         <span className="block text-sm font-bold">{title}</span>
-        <span className="block text-xs text-mist-400">{sub}</span>
+        <span className="block text-xs text-mute">{sub}</span>
       </span>
     </button>
   )
@@ -304,7 +304,7 @@ function Choice({ active, onClick, icon: Icon, title, sub }: { active: boolean; 
 function Row({ k, v, className = '' }: { k: string; v: string; className?: string }) {
   return (
     <div className={`flex items-center justify-between ${className}`}>
-      <dt className="text-mist-400">{k}</dt>
+      <dt className="text-mute">{k}</dt>
       <dd className="font-semibold">{v}</dd>
     </div>
   )

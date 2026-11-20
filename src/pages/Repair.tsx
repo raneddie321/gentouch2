@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { CalendarCheck, Gamepad2, Cpu, Monitor, Joystick, Wrench, ClipboardCheck, Search, CheckCircle2, ShieldCheck, Clock, ChevronDown, PackageCheck } from 'lucide-react'
+import { CalendarCheck, Gamepad2, Cpu, Monitor, Joystick, ClipboardCheck, Search, CheckCircle2, ShieldCheck, Clock, ChevronDown, PackageCheck } from 'lucide-react'
 import ProductArt from '../components/ProductArt'
 import { WhatsAppIcon } from '../components/Icons'
 import { BRANCHES, waLink } from '../data/site'
@@ -56,32 +56,26 @@ export default function Repair() {
   return (
     <>
       <section className="container-x pt-8">
-        <div className="relative overflow-hidden rounded-[28px] border border-neon-500/25 bg-ink-850 p-6 sm:p-10 lg:p-14">
-          <div className="absolute inset-0 bg-[radial-gradient(70%_100%_at_100%_0%,rgba(124,92,255,.35),transparent_60%),radial-gradient(60%_80%_at_0%_100%,rgba(255,77,46,.2),transparent_60%)]" />
-          <div className="grid-bg absolute inset-0 opacity-50" />
+        <div className="mat-grid relative overflow-hidden rounded-2xl p-6 text-white sm:p-10 lg:p-14">
           <div className="relative grid items-center gap-8 lg:grid-cols-2">
             <div>
-              <span className="inline-flex items-center gap-2 rounded-full bg-neon-500/15 px-3 py-1 text-xs font-bold text-neon-300 ring-1 ring-neon-500/30">
-                <Wrench className="h-3.5 w-3.5" /> מעבדת דומינטור
-              </span>
-              <h1 className="mt-4 font-display text-4xl font-black leading-tight sm:text-5xl">מעבדת תיקונים מקצועית לקונסולות, שלטים ומחשבים</h1>
-              <p className="mt-4 max-w-xl text-lg text-mist-300">טכנאים מוסמכים, חלפים מקוריים, הצעת מחיר לפני כל עבודה ו-90 יום אחריות על כל תיקון.</p>
+              <h1 className="h-display text-[56px] sm:text-[80px]">מעבדת התיקונים של דומינטור</h1>
+              <p className="mt-4 max-w-[46ch] text-lg text-white/85">טכנאים מוסמכים, חלפים מקוריים, הצעת מחיר לפני כל עבודה ו-90 יום אחריות על כל תיקון.</p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <a href="#book" className="btn-primary px-6 text-base">
+                <a href="#book" className="btn-go px-6 text-base">
                   <CalendarCheck className="h-5 w-5" /> קביעת תור אונליין
                 </a>
-                <a href="#track" className="btn-ghost px-6 text-base">
+                <a href="#track" className="btn border-2 border-white/40 px-6 text-base text-white hover:border-white">
                   מעקב אחר תיקון
                 </a>
               </div>
-              <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-mist-300">
-                <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-slime-500" /> 90 יום אחריות</span>
-                <span className="inline-flex items-center gap-1.5"><Clock className="h-4 w-4 text-neon-400" /> אבחון תוך 48 שעות</span>
+              <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/85">
+                <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4" /> 90 יום אחריות על כל תיקון</span>
+                <span className="inline-flex items-center gap-1.5"><Clock className="h-4 w-4" /> אבחון תוך 48 שעות בממוצע</span>
               </div>
             </div>
             <div className="relative mx-auto aspect-[5/4] w-full max-w-md">
-              <div className="absolute inset-[15%] rounded-full bg-neon-500/30 blur-3xl" />
-              <ProductArt id="repair-hero" kind="controller" hue="#F5F7FB" className="relative h-full w-full animate-float" />
+              <ProductArt id="repair-hero" kind="controller" hue="#F5F7FB" sticker className="relative h-full w-full animate-stick" />
             </div>
           </div>
         </div>
@@ -90,29 +84,29 @@ export default function Repair() {
       <section className="container-x py-14">
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
           {STEPS.map((s, i) => (
-            <div key={s.t} className="card relative p-5">
-              <span className="absolute left-4 top-4 font-display text-4xl font-black text-white/5">0{i + 1}</span>
-              <s.i className="h-7 w-7 text-neon-400" />
+            <div key={s.t} className="panel relative p-5">
+              <span className="absolute left-4 top-4 text-4xl font-bold text-ink/10">0{i + 1}</span>
+              <s.i className="h-7 w-7 text-signal" />
               <h3 className="mt-3 font-bold">{s.t}</h3>
-              <p className="mt-1 text-sm text-mist-400">{s.s}</p>
+              <p className="mt-1 text-sm text-mute">{s.s}</p>
             </div>
           ))}
         </div>
       </section>
 
       <section className="container-x pb-14">
-        <span className="eyebrow">מחירון שקוף</span>
+        <span className="text-sm font-semibold text-mute">מחירון שקוף</span>
         <h2 className="h-section mb-8 mt-2">שירותים פופולריים</h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s) => (
-            <div key={s.t} className="card group flex items-center gap-4 p-4 transition hover:border-neon-500/30">
-              <span className="h-20 w-24 shrink-0 rounded-xl bg-ink-850">
+            <div key={s.t} className="panel group flex items-center gap-4 p-4 transition hover:border-signal-tint">
+              <span className="h-20 w-24 shrink-0 rounded-xl bg-stage">
                 <ProductArt id={`srv-${s.t}`} kind={s.k} hue={s.h} className="h-full w-full p-2 transition group-hover:scale-105" />
               </span>
               <span className="flex-1">
                 <span className="block font-bold">{s.t}</span>
-                <span className="block text-xs text-mist-400">{s.d}</span>
-                <span className="mt-1 block text-sm font-bold text-neon-300">החל מ-₪{s.p}</span>
+                <span className="block text-xs text-mute">{s.d}</span>
+                <span className="mt-1 block text-sm font-bold text-signal">החל מ-₪{s.p}</span>
               </span>
             </div>
           ))}
@@ -126,12 +120,12 @@ export default function Repair() {
         <h2 className="h-section mb-6">שאלות נפוצות</h2>
         <div className="space-y-3">
           {FAQ.map(([q, a]) => (
-            <details key={q} className="card group p-5 [&_summary::-webkit-details-marker]:hidden">
+            <details key={q} className="panel group p-5 [&_summary::-webkit-details-marker]:hidden">
               <summary className="flex cursor-pointer list-none items-center justify-between font-semibold">
                 {q}
-                <ChevronDown className="h-5 w-5 text-mist-400 transition group-open:rotate-180" />
+                <ChevronDown className="h-5 w-5 text-mute transition group-open:rotate-180" />
               </summary>
-              <p className="mt-3 text-mist-300">{a}</p>
+              <p className="mt-3 text-ink-2">{a}</p>
             </details>
           ))}
         </div>
@@ -174,19 +168,19 @@ function BookingForm() {
     const b = BRANCHES.find((x) => x.id === ticket.branch)!
     return (
       <section id="book" className="container-x scroll-mt-40 pb-14">
-        <div className="card mx-auto max-w-2xl p-8 text-center">
-          <CheckCircle2 className="mx-auto h-14 w-14 text-slime-500" />
-          <h2 className="mt-4 font-display text-2xl font-black">התור נקבע בהצלחה!</h2>
-          <p className="mt-2 text-mist-300">
-            מספר כרטיס תיקון: <b className="font-display text-white" dir="ltr">{ticket.id}</b>
+        <div className="panel mx-auto max-w-2xl p-8 text-center">
+          <CheckCircle2 className="mx-auto h-14 w-14 text-go-deep" />
+          <h2 className="mt-4 text-2xl font-bold">התור נקבע בהצלחה!</h2>
+          <p className="mt-2 text-ink-2">
+            מספר כרטיס תיקון: <b className="font-display text-ink" dir="ltr">{ticket.id}</b>
           </p>
-          <div className="mx-auto mt-5 grid max-w-md gap-2 rounded-2xl border border-white/10 bg-ink-850 p-4 text-right text-sm">
+          <div className="mx-auto mt-5 grid max-w-md gap-2 rounded-2xl border border-line bg-stage p-4 text-right text-sm">
             <Info k="מכשיר" v={`${DEVICES.find((d) => d.id === ticket.device)?.name} — ${ticket.issue}`} />
             <Info k="סניף" v={`${b.city}, ${b.address}`} />
             <Info k="מועד" v={`${new Date(`${ticket.date}T12:00`).toLocaleDateString('he-IL', { weekday: 'long', day: 'numeric', month: 'long' })} בשעה ${ticket.time}`} />
           </div>
-          <p className="mt-4 text-sm text-mist-400">שמרו את מספר הכרטיס כדי לעקוב אחר הסטטוס. תזכורת תישלח בוואטסאפ יום לפני.</p>
-          <button onClick={() => setTicket(null)} className="btn-ghost mt-6">
+          <p className="mt-4 text-sm text-mute">שמרו את מספר הכרטיס כדי לעקוב אחר הסטטוס. תזכורת תישלח בוואטסאפ יום לפני.</p>
+          <button onClick={() => setTicket(null)} className="btn-line mt-6">
             קביעת תור נוסף
           </button>
         </div>
@@ -196,7 +190,7 @@ function BookingForm() {
 
   return (
     <section id="book" className="container-x scroll-mt-40 pb-14">
-      <div className="card overflow-hidden">
+      <div className="panel overflow-hidden">
         <div className="grid lg:grid-cols-[1fr_340px]">
           <form
             noValidate
@@ -224,7 +218,7 @@ function BookingForm() {
               toast('התור נקבע — נתראה במעבדה!')
             }}
           >
-            <span className="eyebrow">קביעת תור אונליין</span>
+            <span className="text-sm font-semibold text-mute">קביעת תור אונליין</span>
             <h2 className="h-section mb-6 mt-2">מה צריך תיקון?</h2>
 
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -237,9 +231,9 @@ function BookingForm() {
                     setIssue('')
                   }}
                   aria-pressed={device === d.id}
-                  className={`flex flex-col items-center gap-2 rounded-2xl border p-4 text-sm font-bold transition ${device === d.id ? 'border-neon-500 bg-neon-500/10 text-white' : 'border-white/10 text-mist-300 hover:border-white/25'}`}
+                  className={`flex flex-col items-center gap-2 rounded-2xl border p-4 text-sm font-bold transition ${device === d.id ? 'border-ink bg-go-tint text-ink' : 'border-line text-ink-2 hover:border-ink'}`}
                 >
-                  <d.icon className={`h-7 w-7 ${device === d.id ? 'text-neon-300' : ''}`} />
+                  <d.icon className={`h-7 w-7 ${device === d.id ? 'text-signal' : ''}`} />
                   {d.name}
                 </button>
               ))}
@@ -249,21 +243,21 @@ function BookingForm() {
               <div className="label">סוג התקלה</div>
               <div className="flex flex-wrap gap-2">
                 {dev.issues.map((x) => (
-                  <button type="button" key={x} onClick={() => setIssue(x)} aria-pressed={issue === x} className={`rounded-full border px-3.5 py-2 text-sm transition ${issue === x ? 'border-fire-500 bg-fire-500/15 text-white' : 'border-white/10 text-mist-300 hover:border-white/25'}`}>
+                  <button type="button" key={x} onClick={() => setIssue(x)} aria-pressed={issue === x} className={`rounded-full border px-3.5 py-2 text-sm transition ${issue === x ? 'border-ink bg-go-tint text-ink' : 'border-line text-ink-2 hover:border-ink'}`}>
                     {x}
                   </button>
                 ))}
               </div>
-              {errors.issue && <p className="mt-1 text-xs text-fire-300">{errors.issue}</p>}
+              {errors.issue && <p className="mt-1 text-xs text-hot">{errors.issue}</p>}
             </div>
 
             <div className="mt-6">
               <div className="label">סניף</div>
               <div className="grid gap-3 sm:grid-cols-2">
                 {BRANCHES.map((b) => (
-                  <button type="button" key={b.id} onClick={() => setBranch(b.id)} aria-pressed={branch === b.id} className={`rounded-xl border p-3 text-right transition ${branch === b.id ? 'border-neon-500 bg-neon-500/10' : 'border-white/10 hover:border-white/25'}`}>
+                  <button type="button" key={b.id} onClick={() => setBranch(b.id)} aria-pressed={branch === b.id} className={`rounded-xl border p-3 text-right transition ${branch === b.id ? 'border-ink bg-go-tint' : 'border-line hover:border-ink'}`}>
                     <span className="block font-bold">{b.city}</span>
-                    <span className="block text-xs text-mist-400">{b.address}</span>
+                    <span className="block text-xs text-mute">{b.address}</span>
                   </button>
                 ))}
               </div>
@@ -281,27 +275,27 @@ function BookingForm() {
                       setTime('')
                     }}
                     aria-pressed={date === d.iso}
-                    className={`flex w-16 shrink-0 flex-col items-center rounded-xl border py-2.5 transition ${date === d.iso ? 'border-fire-500 bg-fire-500/15' : 'border-white/10 hover:border-white/25'}`}
+                    className={`flex w-16 shrink-0 flex-col items-center rounded-xl border py-2.5 transition ${date === d.iso ? 'border-ink bg-go-tint' : 'border-line hover:border-ink'}`}
                   >
-                    <span className="text-xs text-mist-400">{d.day}</span>
-                    <span className="font-display font-bold">{d.label}</span>
+                    <span className="text-xs text-mute">{d.day}</span>
+                    <span className="font-bold">{d.label}</span>
                   </button>
                 ))}
               </div>
-              {errors.date && <p className="mt-1 text-xs text-fire-300">{errors.date}</p>}
+              {errors.date && <p className="mt-1 text-xs text-hot">{errors.date}</p>}
             </div>
 
             {date && (
-              <div className="mt-6 animate-fade-up">
+              <div className="mt-6 animate-rise">
                 <div className="label">שעה</div>
                 <div className="flex flex-wrap gap-2">
                   {slots.map((s) => (
-                    <button type="button" key={s} onClick={() => setTime(s)} aria-pressed={time === s} className={`rounded-lg border px-3.5 py-2 text-sm tabular-nums transition ${time === s ? 'border-fire-500 bg-fire-500/15 text-white' : 'border-white/10 text-mist-300 hover:border-white/25'}`}>
+                    <button type="button" key={s} onClick={() => setTime(s)} aria-pressed={time === s} className={`rounded-lg border px-3.5 py-2 text-sm tabular-nums transition ${time === s ? 'border-ink bg-go-tint text-ink' : 'border-line text-ink-2 hover:border-ink'}`}>
                       {s}
                     </button>
                   ))}
                 </div>
-                {errors.time && <p className="mt-1 text-xs text-fire-300">{errors.time}</p>}
+                {errors.time && <p className="mt-1 text-xs text-hot">{errors.time}</p>}
               </div>
             )}
 
@@ -309,21 +303,21 @@ function BookingForm() {
               <Field name="name" label="שם מלא" err={errors.name} defaultValue={user?.name} autoComplete="name" />
               <Field name="phone" label="טלפון נייד" err={errors.phone} type="tel" autoComplete="tel" placeholder="050-0000000" />
             </div>
-            <button className="btn-primary mt-6 w-full text-base sm:w-auto sm:px-10">
+            <button className="btn-go mt-6 w-full text-base sm:w-auto sm:px-10">
               <CalendarCheck className="h-5 w-5" /> אישור וקביעת תור
             </button>
           </form>
-          <div className="relative border-t border-white/5 bg-gradient-to-b from-neon-600/20 to-transparent p-6 sm:p-8 lg:border-r lg:border-t-0">
-            <h3 className="font-display text-xl font-extrabold">מעדיפים לדבר עם טכנאי?</h3>
-            <p className="mt-2 text-sm text-mist-300">שלחו תמונה או סרטון של התקלה בוואטסאפ ותקבלו הערכת מחיר ראשונית תוך שעה (בשעות הפעילות).</p>
-            <a href={waLink('היי, אשמח להערכת מחיר לתיקון')} target="_blank" rel="noreferrer" className="btn-wa mt-5 w-full">
+          <div className="relative border-t border-line bg-stage p-6 sm:p-8 lg:border-r lg:border-t-0">
+            <h3 className="text-xl font-bold">מעדיפים לדבר עם טכנאי?</h3>
+            <p className="mt-2 text-sm text-ink-2">שלחו תמונה או סרטון של התקלה בוואטסאפ ותקבלו הערכת מחיר ראשונית תוך שעה (בשעות הפעילות).</p>
+            <a href={waLink('היי, אשמח להערכת מחיר לתיקון')} target="_blank" rel="noreferrer" className="btn-line mt-5 w-full">
               <WhatsAppIcon /> שליחה בוואטסאפ
             </a>
-            <ul className="mt-6 space-y-3 text-sm text-mist-300">
-              <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 shrink-0 text-slime-500" /> אבחון חינם בביצוע תיקון</li>
-              <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 shrink-0 text-slime-500" /> חלפים מקוריים או איכותיים בלבד</li>
-              <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 shrink-0 text-slime-500" /> עדכון סטטוס בוואטסאפ בכל שלב</li>
-              <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 shrink-0 text-slime-500" /> איסוף והחזרה בשליח מכל הארץ</li>
+            <ul className="mt-6 space-y-3 text-sm text-ink-2">
+              <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 shrink-0 text-go-deep" /> אבחון חינם בביצוע תיקון</li>
+              <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 shrink-0 text-go-deep" /> חלפים מקוריים או איכותיים בלבד</li>
+              <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 shrink-0 text-go-deep" /> עדכון סטטוס בוואטסאפ בכל שלב</li>
+              <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 shrink-0 text-go-deep" /> איסוף והחזרה בשליח מכל הארץ</li>
             </ul>
           </div>
         </div>
@@ -339,10 +333,10 @@ function TrackRepair() {
   const [res, setRes] = useState<{ id: string; stage: number; device?: string } | null | 'none'>(null)
   return (
     <section id="track" className="container-x scroll-mt-40">
-      <div className="card flex flex-col gap-6 p-5 sm:p-8 lg:flex-row lg:items-center">
+      <div className="panel flex flex-col gap-6 p-5 sm:p-8 lg:flex-row lg:items-center">
         <div className="lg:w-1/3">
-          <h2 className="font-display text-2xl font-extrabold">מעקב אחר תיקון</h2>
-          <p className="mt-1 text-sm text-mist-400">הזינו את מספר כרטיס התיקון (למשל LAB-12345)</p>
+          <h2 className="text-2xl font-bold">מעקב אחר תיקון</h2>
+          <p className="mt-1 text-sm text-mute">הזינו את מספר כרטיס התיקון (למשל LAB-12345)</p>
           <form
             className="mt-4 flex gap-2"
             onSubmit={(e) => {
@@ -355,28 +349,28 @@ function TrackRepair() {
             }}
           >
             <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="LAB-00000" className="input" dir="ltr" aria-label="מספר כרטיס תיקון" />
-            <button className="btn-primary !px-5">בדיקה</button>
+            <button className="btn-go !px-5">בדיקה</button>
           </form>
         </div>
         <div className="flex-1">
           {res === 'none' ? (
-            <p className="rounded-xl bg-fire-500/10 p-4 text-sm text-fire-300">לא מצאנו כרטיס עם המספר הזה. בדקו שהמספר בפורמט LAB-12345.</p>
+            <p className="rounded-xl bg-hot-tint p-4 text-sm text-hot">לא מצאנו כרטיס עם המספר הזה. בדקו שהמספר בפורמט LAB-12345.</p>
           ) : res ? (
-            <div className="animate-fade-up">
-              <div className="mb-4 text-sm text-mist-300">
-                כרטיס <b className="text-white" dir="ltr">{res.id}</b> {res.device && `· ${res.device}`}
+            <div className="animate-rise">
+              <div className="mb-4 text-sm text-ink-2">
+                כרטיס <b className="text-ink" dir="ltr">{res.id}</b> {res.device && `· ${res.device}`}
               </div>
               <ol className="grid grid-cols-5 gap-2">
                 {STAGES.map((s, i) => (
                   <li key={s} className="text-center">
-                    <div className={`h-2 rounded-full ${i <= res.stage ? 'bg-gradient-to-l from-neon-500 to-fire-500' : 'bg-white/10'}`} />
-                    <div className={`mt-2 text-[11px] leading-tight sm:text-xs ${i === res.stage ? 'font-bold text-white' : 'text-mist-500'}`}>{s}</div>
+                    <div className={`h-2 rounded-full ${i <= res.stage ? 'bg-go' : 'bg-stage'}`} />
+                    <div className={`mt-2 text-[11px] leading-tight sm:text-xs ${i === res.stage ? 'font-bold text-ink' : 'text-mute-2'}`}>{s}</div>
                   </li>
                 ))}
               </ol>
             </div>
           ) : (
-            <div className="grid h-full place-items-center rounded-2xl border border-dashed border-white/10 p-6 text-sm text-mist-500">הסטטוס יופיע כאן</div>
+            <div className="grid h-full place-items-center rounded-2xl border border-dashed border-line p-6 text-sm text-mute-2">הסטטוס יופיע כאן</div>
           )}
         </div>
       </div>
@@ -387,7 +381,7 @@ function TrackRepair() {
 function Info({ k, v }: { k: string; v: string }) {
   return (
     <div className="flex justify-between gap-4">
-      <span className="text-mist-400">{k}</span>
+      <span className="text-mute">{k}</span>
       <span className="font-semibold">{v}</span>
     </div>
   )

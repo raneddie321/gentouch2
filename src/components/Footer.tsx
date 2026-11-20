@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Clock, MapPin, Navigation, Phone, Instagram, Youtube, Crown, ArrowLeft, Lock } from 'lucide-react'
+import { Instagram, Youtube } from 'lucide-react'
 import Logo from './Logo'
 import { TikTokIcon, WhatsAppIcon } from './Icons'
 import { BRANCHES, SITE, mapsLink, waLink, wazeLink } from '../data/site'
@@ -9,124 +9,110 @@ import { useStore } from '../context/StoreContext'
 
 export default function Footer() {
   return (
-    <footer className="relative mt-10 border-t border-white/5 bg-ink-950">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-l from-transparent via-neon-500/50 to-transparent" />
+    <footer className="mt-auto bg-paper">
       <ClubSignup />
 
-      <div className="container-x grid gap-10 py-14 lg:grid-cols-12">
-        <div className="lg:col-span-4">
+      <div className="container-x grid gap-12 border-t border-line py-14 lg:grid-cols-12">
+        <div className="lg:col-span-3">
           <Logo />
-          <p className="mt-4 max-w-sm text-sm leading-relaxed text-mist-400">
-            רשת חנויות הגיימינג של ישראל. קונסולות, מחשבים בהרכבה אישית, סימולטורים, רכבים על שלט, מרצ'נדייז — ומעבדת תיקונים מקצועית שמחזירה אתכם למשחק.
-          </p>
-          <div className="mt-5 flex items-center gap-2">
-            <Social href={SITE.social.tiktok} label="TikTok">
-              <TikTokIcon className="h-[18px] w-[18px]" />
+          <p className="mt-4 max-w-[36ch] text-[15px] text-ink-2">רשת חנויות גיימינג ומעבדת תיקונים. קונסולות, מחשבים בהרכבה אישית, סימולטורים, רכבים על שלט ואספנות.</p>
+          <div className="mt-5 flex gap-1">
+            <Social href={SITE.social.tiktok} label="דומינטור בטיקטוק">
+              <TikTokIcon className="h-[19px] w-[19px]" />
             </Social>
-            <Social href={SITE.social.youtube} label="YouTube">
+            <Social href={SITE.social.youtube} label="דומינטור ביוטיוב">
               <Youtube className="h-5 w-5" />
             </Social>
-            <Social href={SITE.social.instagram} label="Instagram">
+            <Social href={SITE.social.instagram} label="דומינטור באינסטגרם">
               <Instagram className="h-5 w-5" />
             </Social>
-            <Social href={waLink()} label="WhatsApp">
+            <Social href={waLink()} label="דומינטור בוואטסאפ">
               <WhatsAppIcon className="h-5 w-5" />
             </Social>
           </div>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:col-span-5">
-          {BRANCHES.map((b) => (
-            <div key={b.id} className="card p-5">
-              <h3 className="flex items-center gap-2 font-display text-lg font-extrabold">
-                <MapPin className="h-5 w-5 text-fire-400" />
-                סניף {b.city}
-              </h3>
-              <p className="mt-1 text-sm text-mist-300">{b.address}</p>
-              <ul className="mt-3 space-y-1 text-sm">
+        {BRANCHES.map((b) => (
+          <div key={b.id} className="lg:col-span-3">
+            <h3 className="h-display text-[40px]">{b.city}</h3>
+            <p className="mt-1 text-[15px]">{b.address}</p>
+            <table className="mt-4 w-full max-w-[280px] text-[14.5px]">
+              <caption className="sr-only">שעות פתיחה בסניף {b.city}</caption>
+              <tbody>
                 {b.hours.map((h) => (
-                  <li key={h.days} className="flex items-center justify-between gap-2 text-mist-400">
-                    <span className="inline-flex items-center gap-1.5">
-                      <Clock className="h-3.5 w-3.5" />
+                  <tr key={h.days}>
+                    <th scope="row" className="py-0.5 text-right font-normal text-mute">
                       {h.days}
-                    </span>
-                    <span className="text-mist-200 tabular-nums">{h.time}</span>
-                  </li>
+                    </th>
+                    <td className="py-0.5 text-left tabular-nums" dir="ltr">
+                      {h.time}
+                    </td>
+                  </tr>
                 ))}
-              </ul>
-              <div className="mt-4 flex flex-wrap gap-2">
-                <a href={wazeLink(b.mapQuery)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-lg bg-[#33CCFF]/10 px-3 py-1.5 text-xs font-bold text-[#7FDDFF] ring-1 ring-[#33CCFF]/25 hover:bg-[#33CCFF]/20">
-                  <Navigation className="h-3.5 w-3.5" />
-                  Waze
-                </a>
-                <a href={mapsLink(b.mapQuery)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-1.5 text-xs font-bold text-mist-200 ring-1 ring-white/10 hover:bg-white/10">
-                  <MapPin className="h-3.5 w-3.5" />
-                  Google Maps
-                </a>
-                <a href={`tel:${b.phone}`} className="inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-1.5 text-xs font-bold text-mist-200 ring-1 ring-white/10 hover:bg-white/10">
-                  <Phone className="h-3.5 w-3.5" />
-                  {b.phone}
-                </a>
-              </div>
+              </tbody>
+            </table>
+            <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 text-[14.5px] font-medium">
+              <a href={wazeLink(b.mapQuery)} target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:decoration-2">
+                ניווט ב-Waze
+              </a>
+              <a href={mapsLink(b.mapQuery)} target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:decoration-2">
+                Google Maps
+              </a>
+              <a href={`tel:${b.phone}`} className="tabular-nums underline underline-offset-4 hover:decoration-2" dir="ltr">
+                {b.phone}
+              </a>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
 
         <div className="grid grid-cols-2 gap-6 lg:col-span-3">
-          <div>
-            <h4 className="mb-3 text-sm font-bold text-white">קטגוריות</h4>
-            <ul className="space-y-2 text-sm text-mist-400">
-              {CATEGORIES.map((c) => (
-                <li key={c.id}>
-                  <Link to={`/catalog/${c.id}`} className="hover:text-white">
-                    {c.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4 className="mb-3 text-sm font-bold text-white">שירות</h4>
-            <ul className="space-y-2 text-sm text-mist-400">
-              <li><Link to="/repair" className="hover:text-white">מעבדת תיקונים</Link></li>
-              <li><Link to="/branches" className="hover:text-white">סניפים ושעות</Link></li>
-              <li><Link to="/account" className="hover:text-white">האזור האישי</Link></li>
-              <li><Link to="/info/shipping" className="hover:text-white">משלוחים והחזרות</Link></li>
-              <li><Link to="/info/warranty" className="hover:text-white">אחריות</Link></li>
-              <li><Link to="/info/terms" className="hover:text-white">תקנון האתר</Link></li>
-              <li><Link to="/info/accessibility" className="hover:text-white">הצהרת נגישות</Link></li>
-            </ul>
-          </div>
+          <FooterList title="חנות">
+            {CATEGORIES.map((c) => (
+              <li key={c.id}>
+                <Link to={`/catalog/${c.id}`} className="hover:underline hover:underline-offset-4">
+                  {c.short}
+                </Link>
+              </li>
+            ))}
+          </FooterList>
+          <FooterList title="שירות">
+            <li><Link to="/repair" className="hover:underline hover:underline-offset-4">מעבדת תיקונים</Link></li>
+            <li><Link to="/repair#track" className="hover:underline hover:underline-offset-4">מעקב תיקון</Link></li>
+            <li><Link to="/info/shipping" className="hover:underline hover:underline-offset-4">משלוחים והחזרות</Link></li>
+            <li><Link to="/info/warranty" className="hover:underline hover:underline-offset-4">אחריות</Link></li>
+            <li><Link to="/info/terms" className="hover:underline hover:underline-offset-4">תקנון</Link></li>
+            <li><Link to="/info/accessibility" className="hover:underline hover:underline-offset-4">נגישות</Link></li>
+          </FooterList>
         </div>
       </div>
 
-      <div className="border-t border-white/5">
-        <div className="container-x flex flex-col items-center justify-between gap-4 py-6 text-xs text-mist-500 md:flex-row">
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
-            <span>© {new Date().getFullYear()} דומינטור גיימינג. כל הזכויות שמורות.</span>
-            <span className="inline-flex items-center gap-1">
-              <Lock className="h-3.5 w-3.5" /> תשלום מאובטח · Visa · Mastercard · Bit · Apple Pay
-            </span>
-          </div>
-          <a
-            href={SITE.credit.url}
-            target="_blank"
-            rel="noreferrer"
-            className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-4 py-2 text-[12.5px] text-mist-400 transition hover:border-neon-500/40 hover:text-white"
-          >
-            <span>עיצוב ופיתוח הקונספט:</span>
-            <span className="font-bold text-mist-200 group-hover:bg-gradient-to-l group-hover:from-fire-400 group-hover:to-neon-400 group-hover:bg-clip-text group-hover:text-transparent">{SITE.credit.name}</span>
-            <ArrowLeft className="h-3.5 w-3.5 transition group-hover:-translate-x-0.5" />
-          </a>
+      <div className="border-t border-line">
+        <div className="container-x flex flex-col items-start justify-between gap-3 py-5 text-[13.5px] text-mute md:flex-row md:items-center">
+          <p>© {new Date().getFullYear()} דומינטור גיימינג בע״מ. תשלום מאובטח באשראי, Bit ו-Apple Pay.</p>
+          <p>
+            עיצוב ופיתוח הקונספט:{' '}
+            <a href={SITE.credit.url} target="_blank" rel="noreferrer" className="font-semibold text-ink underline decoration-line-strong underline-offset-4 hover:decoration-ink">
+              {SITE.credit.name}
+            </a>
+          </p>
         </div>
       </div>
     </footer>
   )
 }
 
+function FooterList({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <h4 className="mb-3 text-[15px] font-semibold">{title}</h4>
+      <ul className="space-y-2 text-[14.5px] text-ink-2">{children}</ul>
+    </div>
+  )
+}
+
 function Social({ href, label, children }: { href: string; label: string; children: React.ReactNode }) {
   return (
-    <a href={href} target="_blank" rel="noreferrer" aria-label={label} className="grid h-10 w-10 place-items-center rounded-xl border border-white/10 bg-white/[0.03] text-mist-300 transition hover:-translate-y-0.5 hover:border-fire-500/50 hover:text-white">
+    <a href={href} target="_blank" rel="noreferrer" aria-label={label} className="grid h-10 w-10 place-items-center rounded-full border border-line-strong text-ink transition-colors hover:border-ink hover:bg-ink hover:text-white">
       {children}
     </a>
   )
@@ -137,51 +123,46 @@ function ClubSignup() {
   const [done, setDone] = useState(false)
   const [err, setErr] = useState('')
   return (
-    <div className="container-x pt-12">
-      <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-l from-neon-600/25 via-ink-800 to-fire-600/20 p-6 sm:p-10">
-        <div className="grid-bg absolute inset-0 opacity-40" />
-        <div className="relative grid items-center gap-6 lg:grid-cols-2">
-          <div>
-            <span className="inline-flex items-center gap-2 rounded-full bg-[#FFB020]/15 px-3 py-1 text-xs font-bold text-[#FFC85A]">
-              <Crown className="h-3.5 w-3.5" />
-              מועדון Dominator Crew
-            </span>
-            <h2 className="mt-3 font-display text-2xl font-extrabold sm:text-3xl">הצטרפו למועדון וקבלו 50₪ לקנייה הראשונה</h2>
-            <p className="mt-2 text-mist-300">גישה מוקדמת להזמנות מוקדמות, מבצעי חברים בלבד והטבות במעבדה.</p>
-          </div>
-          {done ? (
-            <div className="rounded-2xl border border-slime-500/30 bg-slime-500/10 p-5 text-center font-semibold text-slime-400">ברוכים הבאים ל-Crew! קוד ההטבה CREW50 נשלח אליכם 🎮</div>
-          ) : (
-            <form
-              className="flex flex-col gap-3 sm:flex-row"
-              noValidate
-              onSubmit={(e) => {
-                e.preventDefault()
-                const fd = new FormData(e.currentTarget)
-                const email = String(fd.get('email') || '')
-                const phone = String(fd.get('phone') || '')
-                if (!/^\S+@\S+\.\S+$/.test(email)) return setErr('נא להזין כתובת אימייל תקינה')
-                if (phone && !/^0\d{8,9}$/.test(phone.replace(/\D/g, ''))) return setErr('מספר הטלפון לא תקין')
-                setErr('')
-                setDone(true)
-                toast('נרשמתם למועדון בהצלחה')
-              }}
-            >
-              <div className="flex-1">
-                <label htmlFor="club-email" className="sr-only">אימייל</label>
-                <input id="club-email" name="email" type="email" placeholder="האימייל שלכם" className="input" dir="rtl" />
-              </div>
-              <div className="sm:w-40">
-                <label htmlFor="club-phone" className="sr-only">טלפון</label>
-                <input id="club-phone" name="phone" type="tel" placeholder="נייד (רשות)" className="input" />
-              </div>
-              <button className="btn-primary whitespace-nowrap">הצטרפות חינם</button>
-              {err && <p className="text-sm text-fire-300 sm:hidden">{err}</p>}
-            </form>
-          )}
+    <section className="bg-go" aria-labelledby="club-title">
+      <div className="container-x grid items-center gap-6 py-10 lg:grid-cols-2 lg:py-12">
+        <div>
+          <h2 id="club-title" className="h-display text-[44px] sm:text-[52px]">
+            50 ₪ מתנה בהצטרפות למועדון
+          </h2>
+          <p className="mt-2 max-w-[48ch] text-ink-2">חברי המועדון שומעים ראשונים על הזמנות מוקדמות, מקבלים מבצעים שלא מתפרסמים ו-10% הנחה במעבדה.</p>
         </div>
-        {err && !done && <p className="relative mt-2 hidden text-sm text-fire-300 sm:block lg:text-left">{err}</p>}
+        {done ? (
+          <p className="text-lg font-semibold" role="status">
+            נרשמתם. קוד ההטבה CREW50 נשלח למייל שלכם.
+          </p>
+        ) : (
+          <form
+            noValidate
+            className="w-full"
+            onSubmit={(e) => {
+              e.preventDefault()
+              const email = String(new FormData(e.currentTarget).get('email') || '')
+              if (!/^\S+@\S+\.\S+$/.test(email)) return setErr('כתובת המייל לא תקינה. בדקו שיש בה @ ונקודה.')
+              setErr('')
+              setDone(true)
+              toast('נרשמתם למועדון')
+            }}
+          >
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <label htmlFor="club-email" className="sr-only">
+                כתובת מייל
+              </label>
+              <input id="club-email" name="email" type="email" placeholder="כתובת המייל שלכם" className="input h-12 border-ink sm:flex-1" aria-invalid={!!err} aria-describedby={err ? 'club-err' : undefined} />
+              <button className="btn-ink h-12 px-6">הצטרפות למועדון</button>
+            </div>
+            {err && (
+              <p id="club-err" className="mt-2 text-sm font-medium">
+                {err}
+              </p>
+            )}
+          </form>
+        )}
       </div>
-    </div>
+    </section>
   )
 }

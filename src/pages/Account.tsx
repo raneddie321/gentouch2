@@ -16,13 +16,12 @@ export default function Account() {
   if (!user && tab !== 'wishlist') {
     return (
       <div className="container-x py-12">
-        <div className="card mx-auto grid max-w-4xl overflow-hidden md:grid-cols-2">
-          <div className="relative hidden bg-gradient-to-br from-neon-600/40 via-ink-800 to-fire-600/25 p-10 md:block">
-            <div className="grid-bg absolute inset-0 opacity-50" />
+        <div className="panel mx-auto grid max-w-4xl overflow-hidden md:grid-cols-2">
+          <div className="relative hidden mat-grid p-10 text-white md:block">
             <div className="relative">
-              <Crown className="h-10 w-10 text-[#FFC85A]" />
-              <h2 className="mt-4 font-display text-3xl font-black">ברוכים הבאים ל-Crew</h2>
-              <ul className="mt-6 space-y-3 text-mist-200">
+              <Crown className="h-10 w-10 text-ink" />
+              <h2 className="mt-4 h-display text-[48px]">מועדון הלקוחות של דומינטור</h2>
+              <ul className="mt-6 space-y-3 text-white/85">
                 <li>✓ מעקב הזמנות ותיקונים</li>
                 <li>✓ רשימת מועדפים מסונכרנת</li>
                 <li>✓ ₪50 הטבה לקנייה הראשונה</li>
@@ -48,17 +47,17 @@ export default function Account() {
               setSp({ tab: 'profile' })
             }}
           >
-            <h1 className="font-display text-2xl font-black">התחברות / הרשמה</h1>
-            <p className="mt-1 text-sm text-mist-400">נשלח אליכם קוד חד-פעמי — בלי סיסמאות.</p>
+            <h1 className="text-2xl font-bold">התחברות / הרשמה</h1>
+            <p className="mt-1 text-sm text-mute">נשלח אליכם קוד חד-פעמי — בלי סיסמאות.</p>
             <div className="mt-6 space-y-4">
               <Field name="name" label="שם מלא" err={errors.name} autoComplete="name" />
               <Field name="email" label="אימייל" type="email" err={errors.email} autoComplete="email" />
-              <label className="flex items-center gap-2 text-sm text-mist-300">
-                <input type="checkbox" name="club" defaultChecked className="accent-fire-500" /> צרפו אותי למועדון הלקוחות
+              <label className="flex items-center gap-2 text-sm text-ink-2">
+                <input type="checkbox" name="club" defaultChecked className="accent-hot" /> צרפו אותי למועדון הלקוחות
               </label>
             </div>
-            <button className="btn-primary mt-6 w-full">כניסה</button>
-            <Link to="/account?tab=wishlist" className="mt-4 block text-center text-sm text-mist-400 hover:text-white">
+            <button className="btn-go mt-6 w-full">כניסה</button>
+            <Link to="/account?tab=wishlist" className="mt-4 block text-center text-sm text-mute hover:text-ink">
               צפייה במועדפים בלי להתחבר
             </Link>
           </form>
@@ -75,13 +74,13 @@ export default function Account() {
 
   return (
     <div className="container-x py-10">
-      <h1 className="h-section">{user ? `היי ${user.name.split(' ')[0]} 👾` : 'המועדפים שלי'}</h1>
+      <h1 className="h-section">{user ? `היי ${user.name.split(' ')[0]}` : 'המועדפים שלי'}</h1>
       <div className="mt-6 grid gap-8 lg:grid-cols-[240px_1fr]">
         <nav className="flex gap-2 overflow-x-auto lg:flex-col" aria-label="אזור אישי">
           {tabs
             .filter((t) => user || t.id === 'wishlist')
             .map((t) => (
-              <button key={t.id} onClick={() => setSp({ tab: t.id })} className={`flex shrink-0 items-center gap-2 rounded-xl px-4 py-3 text-right text-sm font-semibold transition ${tab === t.id ? 'bg-white/[0.07] text-white' : 'text-mist-400 hover:text-white'}`}>
+              <button key={t.id} onClick={() => setSp({ tab: t.id })} className={`flex shrink-0 items-center gap-2 rounded-xl px-4 py-3 text-right text-sm font-semibold transition ${tab === t.id ? 'bg-stage text-ink' : 'text-mute hover:text-ink'}`}>
                 <t.icon className="h-4 w-4" /> {t.label}
               </button>
             ))}
@@ -92,12 +91,12 @@ export default function Account() {
                 toast('התנתקת')
                 setSp({})
               }}
-              className="flex shrink-0 items-center gap-2 rounded-xl px-4 py-3 text-sm text-mist-500 hover:text-fire-400"
+              className="flex shrink-0 items-center gap-2 rounded-xl px-4 py-3 text-sm text-mute-2 hover:text-hot"
             >
               <LogOut className="h-4 w-4" /> התנתקות
             </button>
           ) : (
-            <button onClick={() => setSp({ tab: 'profile' })} className="flex shrink-0 items-center gap-2 rounded-xl px-4 py-3 text-sm text-fire-400">
+            <button onClick={() => setSp({ tab: 'profile' })} className="flex shrink-0 items-center gap-2 rounded-xl px-4 py-3 text-sm text-hot">
               <User className="h-4 w-4" /> התחברות
             </button>
           )}
@@ -116,19 +115,19 @@ export default function Account() {
           {tab === 'orders' && <Empty icon={Package} text="אין עדיין הזמנות בחשבון הזה." />}
           {tab === 'profile' && user && (
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="card p-6">
-                <div className="text-sm text-mist-400">שם</div>
+              <div className="panel p-6">
+                <div className="text-sm text-mute">שם</div>
                 <div className="text-lg font-bold">{user.name}</div>
-                <div className="mt-3 text-sm text-mist-400">אימייל</div>
+                <div className="mt-3 text-sm text-mute">אימייל</div>
                 <div className="font-semibold">{user.email}</div>
               </div>
-              <div className="card bg-gradient-to-br from-[#FFB020]/15 to-transparent p-6">
-                <Crown className="h-7 w-7 text-[#FFC85A]" />
-                <div className="mt-2 font-display text-lg font-extrabold">{user.club ? 'חבר/ת מועדון Crew' : 'עדיין לא במועדון'}</div>
-                <div className="text-sm text-mist-300">{user.club ? 'קוד ההטבה שלך: CREW50' : 'הצטרפו בתחתית העמוד וקבלו ₪50'}</div>
+              <div className="panel bg-go-tint p-6">
+                <Crown className="h-7 w-7 text-ink" />
+                <div className="mt-2 text-lg font-bold">{user.club ? 'חבר/ת מועדון Crew' : 'עדיין לא במועדון'}</div>
+                <div className="text-sm text-ink-2">{user.club ? 'קוד ההטבה שלך: CREW50' : 'הצטרפו בתחתית העמוד וקבלו ₪50'}</div>
               </div>
-              <Link to="/repair#track" className="card flex items-center gap-3 p-6 transition hover:border-neon-500/30 sm:col-span-2">
-                <Wrench className="h-6 w-6 text-neon-400" /> מעקב אחר תיקונים במעבדה
+              <Link to="/repair#track" className="panel flex items-center gap-3 p-6 transition hover:border-signal-tint sm:col-span-2">
+                <Wrench className="h-6 w-6 text-signal" /> מעקב אחר תיקונים במעבדה
               </Link>
             </div>
           )}
@@ -140,10 +139,10 @@ export default function Account() {
 
 function Empty({ icon: Icon, text }: { icon: React.ComponentType<{ className?: string }>; text: string }) {
   return (
-    <div className="card flex flex-col items-center p-12 text-center">
-      <Icon className="h-10 w-10 text-mist-500" />
-      <p className="mt-3 text-mist-300">{text}</p>
-      <Link to="/catalog" className="btn-primary mt-6">
+    <div className="panel flex flex-col items-center p-12 text-center">
+      <Icon className="h-10 w-10 text-mute-2" />
+      <p className="mt-3 text-ink-2">{text}</p>
+      <Link to="/catalog" className="btn-go mt-6">
         לקטלוג
       </Link>
     </div>

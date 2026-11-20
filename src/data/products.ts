@@ -154,7 +154,7 @@ export const BRANDS = Array.from(new Set(PRODUCTS.map((x) => x.brand))).sort()
 export const formatPrice = (n: number) => '₪' + n.toLocaleString('he-IL')
 
 export const BADGE_LABEL: Record<Badge, string> = {
-  hot: 'חם 🔥',
+  hot: 'חם',
   new: 'חדש',
   preorder: 'הזמנה מוקדמת',
   sale: 'מבצע',

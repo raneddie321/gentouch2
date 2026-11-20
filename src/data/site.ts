@@ -18,7 +18,7 @@ export const SITE = {
   },
 }
 
-export function waLink(text = 'היי דומינטור, אשמח לייעוץ 🙂') {
+export function waLink(text = 'היי דומינטור, אשמח לייעוץ') {
   return `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(text)}`
 }
 
@@ -40,7 +40,7 @@ export const BRANCHES: Branch[] = [
     hours: [
       { days: 'א׳–ה׳', time: '10:00–20:00' },
       { days: 'ו׳', time: '09:30–14:30' },
-      { days: 'מוצ״ש', time: 'שעה אחרי צאת השבת–22:30' },
+      { days: 'מוצ״ש', time: '19:00–22:30' },
     ],
     phone: '04-000-0000',
     services: ['חנות מלאה', 'מעבדת תיקונים', 'עמדות ניסיון סימולטורים'],
@@ -53,7 +53,7 @@ export const BRANCHES: Branch[] = [
     hours: [
       { days: 'א׳–ה׳', time: '10:00–21:00' },
       { days: 'ו׳', time: '09:30–15:00' },
-      { days: 'מוצ״ש', time: 'שעה אחרי צאת השבת–23:00' },
+      { days: 'מוצ״ש', time: '19:00–23:00' },
     ],
     phone: '03-000-0000',
     services: ['חנות מלאה', 'קבלת מכשירים למעבדה', 'הרכבת מחשבים'],

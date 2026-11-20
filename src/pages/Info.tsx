@@ -43,12 +43,12 @@ export default function Info() {
   return (
     <div className="container-x max-w-3xl py-12">
       <h1 className="h-section">{p.title}</h1>
-      <div className="card mt-6 space-y-4 p-6 leading-relaxed text-mist-300 sm:p-8">
+      <div className="panel mt-6 space-y-4 p-6 leading-relaxed text-ink-2 sm:p-8">
         {p.body.map((b) => (
           <p key={b}>{b}</p>
         ))}
       </div>
-      <Link to="/" className="btn-ghost mt-6">
+      <Link to="/" className="btn-line mt-6">
         חזרה לעמוד הבית
       </Link>
     </div>

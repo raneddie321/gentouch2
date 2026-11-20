@@ -1,17 +1,36 @@
 import type { ArtKind } from '../data/products'
 
-type Props = { kind: ArtKind; hue: string; label?: string; className?: string; id: string }
+type Props = { kind: ArtKind; hue: string; label?: string; className?: string; id: string; sticker?: boolean }
 
 // Stylized vector product renders. Each piece is drawn on a 200×160 canvas.
-export default function ProductArt({ kind, hue, label, className = '', id }: Props) {
+// `sticker` gives the die-cut look of the Dominator logo: white border, ink outline, hard offset shadow.
+export default function ProductArt({ kind, hue, label, className = '', id, sticker = false }: Props) {
   const g = `g-${id}`
   const s = `s-${id}`
+  const f = `f-${id}`
   const light = isLight(hue)
   const ink = light ? '#141821' : '#EEF1F7'
   const body = `url(#${g})`
   return (
-    <svg viewBox="0 0 200 160" className={className} role="img" aria-hidden="true">
+    <svg viewBox="-8 -8 216 176" className={className} role="img" aria-hidden="true">
       <defs>
+        {sticker && (
+          <filter id={f} x="-15%" y="-15%" width="130%" height="135%">
+            <feMorphology in="SourceAlpha" operator="dilate" radius="6" result="w" />
+            <feMorphology in="SourceAlpha" operator="dilate" radius="7.5" result="o" />
+            <feFlood floodColor="#121417" />
+            <feComposite in2="o" operator="in" result="outline" />
+            <feOffset in="outline" dx="-4" dy="5" result="shadow" />
+            <feFlood floodColor="#FFFFFF" />
+            <feComposite in2="w" operator="in" result="white" />
+            <feMerge>
+              <feMergeNode in="shadow" />
+              <feMergeNode in="outline" />
+              <feMergeNode in="white" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        )}
         <linearGradient id={g} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stopColor={shade(hue, 0.18)} />
           <stop offset="1" stopColor={shade(hue, -0.28)} />
@@ -21,8 +40,8 @@ export default function ProductArt({ kind, hue, label, className = '', id }: Pro
           <stop offset="1" stopColor="#000" stopOpacity="0" />
         </radialGradient>
       </defs>
-      <ellipse cx="100" cy="146" rx="70" ry="8" fill={`url(#${s})`} />
-      {draw(kind, body, hue, ink, label)}
+      {!sticker && <ellipse cx="100" cy="146" rx="66" ry="6" fill={`url(#${s})`} opacity=".45" />}
+      <g filter={sticker ? `url(#${f})` : undefined}>{draw(kind, body, hue, ink, label)}</g>
     </svg>
   )
 }
@@ -69,7 +88,7 @@ function draw(kind: ArtKind, body: string, hue: string, ink: string, label?: str
             </linearGradient>
           </defs>
           {label && (
-            <text x="100" y="88" textAnchor="middle" fontFamily="Rubik" fontWeight="800" fontSize="12" fill="#fff">
+            <text x="100" y="88" textAnchor="middle" fontFamily="IBM Plex Sans Hebrew, sans-serif" fontWeight="800" fontSize="12" fill="#fff">
               {label}
             </text>
           )}
@@ -194,12 +213,12 @@ function draw(kind: ArtKind, body: string, hue: string, ink: string, label?: str
         <g>
           <rect x="58" y="10" width="84" height="134" rx="5" fill={body} {...st} />
           <rect x="58" y="10" width="84" height="18" rx="5" fill={/Switch|MARIO|DK|POK/i.test(label || '') ? '#E60012' : '#2B6BFF'} />
-          <text x="66" y="23" fontFamily="Rubik" fontWeight="700" fontSize="9" fill="#fff">
+          <text x="66" y="23" fontFamily="IBM Plex Sans Hebrew, sans-serif" fontWeight="700" fontSize="9" fill="#fff">
             {/MARIO|DK|POK/i.test(label || '') ? 'SWITCH 2' : 'PS5'}
           </text>
           <circle cx="100" cy="76" r="30" fill="#fff" opacity=".12" />
           <path d="M66 140 L100 96 L134 140Z" fill="#000" opacity=".2" />
-          <text x="100" y="82" textAnchor="middle" fontFamily="Rubik" fontWeight="900" fontSize={(label || '').length > 9 ? 11 : 16} fill="#fff" style={{ letterSpacing: 1 }}>
+          <text x="100" y="82" textAnchor="middle" fontFamily="IBM Plex Sans Hebrew, sans-serif" fontWeight="900" fontSize={(label || '').length > 9 ? 11 : 16} fill="#fff" style={{ letterSpacing: 1 }}>
             {label}
           </text>
         </g>

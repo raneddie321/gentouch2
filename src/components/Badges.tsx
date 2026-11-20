@@ -1,23 +1,24 @@
 import { BADGE_LABEL, type Badge } from '../data/products'
+
 const STYLE: Record<Badge, string> = {
-  hot: 'bg-fire-500 text-white',
-  sale: 'bg-[#FFB020] text-ink-900',
-  new: 'bg-neon-500 text-white',
-  preorder: 'bg-[#14C8A8] text-ink-900',
-  exclusive: 'bg-slime-500 text-ink-900',
+  hot: 'bg-paper text-ink',
+  sale: 'bg-hot text-white border-hot',
+  new: 'bg-ink text-white',
+  preorder: 'bg-signal-tint text-ink',
+  exclusive: 'bg-go text-ink',
 }
+
 export default function Badges({ badges, discount }: { badges: Badge[]; discount?: number }) {
-  if (!badges.length && !discount) return null
+  const list = badges.filter((b) => b !== 'sale' && b !== 'hot').slice(0, 1)
+  if (!list.length && !discount) return null
   return (
     <div className="flex flex-wrap gap-1.5">
-      {discount ? <span className="chip bg-fire-500 text-white">-{discount}%</span> : null}
-      {badges
-        .filter((b) => !(discount && b === 'sale'))
-        .map((b) => (
-          <span key={b} className={`chip ${STYLE[b]}`}>
-            {BADGE_LABEL[b]}
-          </span>
-        ))}
+      {discount ? <span className="tag border-hot bg-hot text-white">{discount}%-</span> : null}
+      {list.map((b) => (
+        <span key={b} className={`tag ${STYLE[b]}`}>
+          {BADGE_LABEL[b]}
+        </span>
+      ))}
     </div>
   )
 }

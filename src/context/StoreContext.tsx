@@ -83,7 +83,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const toggleWish = useCallback(
     (id: string) => {
       const has = wishlist.includes(id)
-      toast(has ? 'הוסר מהמועדפים' : 'נוסף למועדפים ❤')
+      toast(has ? 'הוסר מהמועדפים' : 'נוסף למועדפים')
       setWishlist((w) => (has ? w.filter((x) => x !== id) : [...w, id]))
     },
     [toast, wishlist],

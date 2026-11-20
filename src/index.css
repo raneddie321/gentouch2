@@ -3,42 +3,48 @@
 @tailwind utilities;
 
 @layer base {
-  :root { color-scheme: dark; }
-  html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
-  body {
-    @apply bg-ink-900 text-mist-100 font-sans antialiased;
-    background-image:
-      radial-gradient(1200px 600px at 85% -10%, rgba(124, 92, 255, .10), transparent 60%),
-      radial-gradient(900px 500px at 0% 10%, rgba(255, 77, 46, .07), transparent 60%);
-    background-attachment: fixed;
-  }
-  ::selection { background: rgba(255, 77, 46, .35); }
-  :focus-visible { outline: 2px solid #7C5CFF; outline-offset: 2px; border-radius: 6px; }
-  ::-webkit-scrollbar { width: 10px; height: 10px; }
-  ::-webkit-scrollbar-thumb { background: #252B3D; border-radius: 10px; border: 2px solid #0B0D12; }
-  ::-webkit-scrollbar-track { background: transparent; }
+  :root { color-scheme: light; }
+  html { -webkit-tap-highlight-color: transparent; }
+  body { @apply bg-stage font-sans text-[15.5px] leading-relaxed text-ink antialiased; }
+  ::selection { background: #34D61C; color: #121417; }
+  :focus-visible { outline: 2px solid #2E5BFF; outline-offset: 2px; border-radius: 6px; }
+  h1, h2, h3 { text-wrap: balance; }
 }
 
 @layer components {
-  .container-x { @apply mx-auto w-full max-w-[1320px] px-4 sm:px-6 lg:px-8; }
-  .card { @apply rounded-2xl border border-white/[0.06] bg-ink-800 shadow-card; }
-  .btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-[15px] font-bold transition duration-200 active:scale-[.98] disabled:opacity-50 disabled:pointer-events-none; }
-  .btn-primary { @apply btn bg-gradient-to-l from-fire-500 to-fire-400 text-white shadow-glow hover:brightness-110; }
-  .btn-ghost { @apply btn border border-white/10 bg-white/[0.03] text-mist-100 hover:bg-white/[0.07] hover:border-white/20; }
-  .btn-wa { @apply btn bg-[#1FAF5A] text-white hover:bg-[#25C565] shadow-[0_10px_30px_-12px_rgba(37,197,101,.7)]; }
-  .chip { @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-bold leading-none; }
-  .input { @apply w-full rounded-xl border border-white/10 bg-ink-850 px-4 py-3 text-[15px] text-mist-100 placeholder:text-mist-500 outline-none transition focus:border-neon-500 focus:ring-4 focus:ring-neon-500/15; }
-  .label { @apply mb-1.5 block text-sm font-medium text-mist-300; }
-  .eyebrow { @apply text-xs font-bold uppercase tracking-[.2em] text-fire-400; }
-  .h-section { @apply font-display text-2xl font-extrabold tracking-tight sm:text-3xl lg:text-4xl; }
+  .container-x { @apply mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8; }
+  .panel { @apply rounded-2xl border border-line bg-paper; }
+
+  /* Physical arcade-button press: hard shadow, pushes in on hover/press. */
+  .btn { @apply inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-[10px] px-5 py-3 text-[15px] font-semibold transition-[transform,box-shadow,background-color,border-color] duration-150 disabled:pointer-events-none disabled:opacity-50; }
+  .btn-go { @apply btn border-2 border-ink bg-go text-ink shadow-hard hover:-translate-x-px hover:translate-y-px hover:shadow-hard-sm active:-translate-x-[3px] active:translate-y-[3px] active:shadow-none; }
+  .btn-ink { @apply btn border-2 border-ink bg-ink text-white hover:bg-ink-2; }
+  .btn-line { @apply btn border border-line-strong bg-paper text-ink hover:border-ink; }
+
+  .input { @apply w-full rounded-[10px] border border-line-strong bg-paper px-3.5 py-2.5 text-[15px] text-ink outline-none transition placeholder:text-mute-2 focus:border-ink focus:ring-2 focus:ring-signal/25; }
+  .label { @apply mb-1.5 block text-sm font-medium text-ink-2; }
+  .h-display { @apply font-display font-bold leading-[.88] tracking-[-.005em]; }
+  .h-section { @apply h-display text-[44px] sm:text-[56px] lg:text-[64px]; }
+  .tag { @apply inline-flex items-center rounded-md border-[1.5px] border-ink px-1.5 py-0.5 text-[11.5px] font-bold leading-none; }
   .no-scrollbar { scrollbar-width: none; }
   .no-scrollbar::-webkit-scrollbar { display: none; }
-  .grid-bg {
-    background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-    background-size: 32px 32px;
+  .mat-grid {
+    background-color: #1D5A70;
+    background-image:
+      linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px),
+      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+/* Repair ticket: perforated top edge like a tear-off receipt. */
+.ticket {
+  -webkit-mask: radial-gradient(circle 6px at 50% 0, transparent 97%, #000) top / 18px 100% repeat-x;
+  mask: radial-gradient(circle 6px at 50% 0, transparent 97%, #000) top / 18px 100% repeat-x;
 }
