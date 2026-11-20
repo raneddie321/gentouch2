@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Search } from 'lucide-react'
 import { formatPrice, searchProducts } from '../data/products'
 import { CATEGORIES } from '../data/categories'
-import ProductArt from './ProductArt'
+import ProductMedia from './ProductMedia'
 
 const POPULAR = ['PS5', 'Switch 2', 'RTX 5070', 'הגה', 'Funko', 'רחפן']
 
@@ -110,7 +110,7 @@ export default function SearchBox({ onDone, autoFocus = false }: { onDone?: () =
                       className={`flex w-full items-center gap-3 px-3 py-2 text-right transition ${i === active ? 'bg-stage' : ''}`}
                     >
                       <span className="h-12 w-14 shrink-0 rounded-lg bg-stage">
-                        <ProductArt id={`s-${p.id}`} kind={p.art} hue={p.hue} label={p.label} className="h-full w-full p-1" />
+                        <ProductMedia p={p} id={`s-${p.id}`} className="h-full w-full p-1" />
                       </span>
                       <span className="min-w-0 flex-1">
                         <span className="block truncate text-sm font-semibold">{p.name}</span>

@@ -12,6 +12,7 @@ import Repair from './pages/Repair'
 import Branches from './pages/Branches'
 import Account from './pages/Account'
 import Info from './pages/Info'
+import Credits from './pages/Credits'
 import NotFound from './pages/NotFound'
 
 function ScrollTop() {
@@ -41,6 +42,7 @@ export default function App() {
           <Route path="/repair" element={<Repair />} />
           <Route path="/branches" element={<Branches />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/info/credits" element={<Credits />} />
           <Route path="/info/:page" element={<Info />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

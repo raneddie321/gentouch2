@@ -79,6 +79,7 @@ export default function Footer() {
             <li><Link to="/info/warranty" className="hover:underline hover:underline-offset-4">אחריות</Link></li>
             <li><Link to="/info/terms" className="hover:underline hover:underline-offset-4">תקנון</Link></li>
             <li><Link to="/info/accessibility" className="hover:underline hover:underline-offset-4">נגישות</Link></li>
+            <li><Link to="/info/credits" className="hover:underline hover:underline-offset-4">קרדיטים לתמונות</Link></li>
           </FooterList>
         </div>
       </div>

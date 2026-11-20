@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { Heart, Plus } from 'lucide-react'
 import { formatPrice, type Product } from '../data/products'
 import { useStore } from '../context/StoreContext'
-import ProductArt from './ProductArt'
+import ProductMedia from './ProductMedia'
 import Badges from './Badges'
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -15,7 +15,7 @@ export default function ProductCard({ product: p, className = '' }: { product: P
   return (
     <article className={`group relative flex flex-col rounded-2xl border border-line bg-paper p-2 transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:border-ink hover:shadow-hard ${className}`}>
       <Link to={`/product/${p.id}`} className="relative block aspect-[6/5] overflow-hidden rounded-xl bg-stage" aria-label={p.name}>
-        <ProductArt id={p.id} kind={p.art} hue={p.hue} label={p.label} className="h-full w-full p-4 transition-transform duration-300 group-hover:scale-[1.04]" />
+        <ProductMedia p={p} id={p.id} className="h-full w-full p-4 transition-transform duration-300 group-hover:scale-[1.04]" />
         <div className="absolute right-2 top-2">
           <Badges badges={p.badges} discount={discountOf(p)} />
         </div>

@@ -4,7 +4,7 @@ import { Minus, Plus, ShoppingBag, Trash2, X, Truck } from 'lucide-react'
 import { useStore } from '../context/StoreContext'
 import { formatPrice } from '../data/products'
 import { SITE } from '../data/site'
-import ProductArt from './ProductArt'
+import ProductMedia from './ProductMedia'
 
 export default function CartDrawer() {
   const { cartOpen, setCartOpen, items, subtotal, setQty, remove, count } = useStore()
@@ -76,7 +76,7 @@ export default function CartDrawer() {
               {items.map(({ product: p, qty }) => (
                 <li key={p.id} className="flex gap-3 rounded-2xl border border-line bg-paper p-3 animate-rise">
                   <Link to={`/product/${p.id}`} onClick={() => setCartOpen(false)} className="h-20 w-24 shrink-0 rounded-xl bg-stage">
-                    <ProductArt id={`c-${p.id}`} kind={p.art} hue={p.hue} label={p.label} className="h-full w-full p-1.5" />
+                    <ProductMedia p={p} id={`c-${p.id}`} className="h-full w-full p-1.5" />
                   </Link>
                   <div className="flex min-w-0 flex-1 flex-col">
                     <div className="flex items-start justify-between gap-2">

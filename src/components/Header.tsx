@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { ChevronDown, Heart, Menu, ShoppingBag, User, Wrench, X } from 'lucide-react'
 import Logo from './Logo'
 import SearchBox from './SearchBox'
-import ProductArt from './ProductArt'
+import ProductMedia from './ProductMedia'
 import { WhatsAppIcon } from './Icons'
 import { CATEGORIES, type Category } from '../data/categories'
 import { PRODUCTS, formatPrice } from '../data/products'
@@ -170,7 +170,7 @@ function MegaPanel({ c, onEnter }: { c: Category; onEnter: () => void }) {
           {featured.map((p) => (
             <Link key={p.id} to={`/product/${p.id}`} className="group rounded-xl border border-line p-2 hover:border-ink">
               <span className="block aspect-[6/4] rounded-lg bg-stage">
-                <ProductArt id={`m-${p.id}`} kind={p.art} hue={p.hue} label={p.label} className="h-full w-full p-3" />
+                <ProductMedia p={p} id={`m-${p.id}`} className="h-full w-full p-3" />
               </span>
               <span className="mt-2 block px-1 text-sm font-semibold leading-snug">{p.name}</span>
               <span className="block px-1 pb-1 text-sm tabular-nums text-mute">{formatPrice(p.price)}</span>

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ChevronLeft, ChevronRight, ShieldCheck, Users, BadgeCheck, Truck } from 'lucide-react'
 import ProductArt from '../components/ProductArt'
+import ProductMedia from '../components/ProductMedia'
 import ProductCard from '../components/ProductCard'
 import { WhatsAppIcon } from '../components/Icons'
 import { CATEGORIES } from '../data/categories'
@@ -74,7 +75,7 @@ function Hero() {
 
         <div className="relative lg:col-span-6">
           <Link to={`/product/${p.id}`} key={p.id} className="relative block" aria-label={`${p.name}, ${formatPrice(p.price)}`}>
-            <ProductArt id={`hero-${p.id}`} kind={p.art} hue={p.hue} label={p.label} sticker className="mx-auto w-full max-w-[600px] animate-stick" />
+            <ProductMedia p={p} id={`hero-${p.id}`} sticker className="mx-auto w-full max-w-[600px] animate-stick" />
             <span className="absolute left-[6%] top-[4%] grid h-[104px] w-[104px] rotate-[10deg] place-items-center rounded-full border-2 border-ink bg-hot text-center text-white shadow-hard sm:h-[124px] sm:w-[124px]">
               <span className="leading-none">
                 <span className="block text-xs font-medium opacity-90">{p.oldPrice ? 'במקום ' + formatPrice(p.oldPrice) : 'רק'}</span>
@@ -99,7 +100,7 @@ function Hero() {
             >
               <span className={`absolute -top-px right-0 h-[3px] w-full transition-colors ${on ? 'bg-ink' : 'bg-transparent'}`} />
               <span className="h-12 w-14 shrink-0 rounded-lg bg-paper">
-                <ProductArt id={`tab-${x.product}`} kind={xp.art} hue={xp.hue} label={xp.label} className="h-full w-full p-1" />
+                <ProductMedia p={xp} id={`tab-${x.product}`} className="h-full w-full p-1" />
               </span>
               <span>
                 <span className={`block font-semibold ${on ? 'text-ink' : ''}`}>{x.tab}</span>

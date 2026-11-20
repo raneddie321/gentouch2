@@ -13,6 +13,7 @@ import { BRANCHES, waLink } from '../data/site'
 import { useStore } from '../context/StoreContext'
 import { SectionHead } from './Home'
 import NotFound from './NotFound'
+import { PHOTOS } from '../data/photos'
 
 const VIEWS = ['#ECEEF2', '#E3E7ED', '#F4F5F8']
 
@@ -64,15 +65,27 @@ export default function ProductPage() {
             <div className="absolute right-4 top-4 z-10">
               <Badges badges={p.badges} discount={disc} />
             </div>
-            <ProductArt
-              id={`pp-${p.id}`}
-              kind={p.art}
-              hue={p.hue}
-              label={p.label}
-              className={`relative aspect-[5/4] w-full p-10 transition-transform duration-300 ${view === 1 ? 'scale-110' : view === 2 ? '-scale-x-100' : ''}`}
-            />
+            {p.image ? (
+              <img src={p.image} alt={p.name} width={960} height={800} className="relative aspect-[6/5] w-full object-cover" />
+            ) : (
+              <ProductArt
+                id={`pp-${p.id}`}
+                kind={p.art}
+                hue={p.hue}
+                label={p.label}
+                className={`relative aspect-[5/4] w-full p-10 transition-transform duration-300 ${view === 1 ? 'scale-110' : view === 2 ? '-scale-x-100' : ''}`}
+              />
+            )}
           </div>
-          <div className="mt-3 grid grid-cols-3 gap-3">
+          {p.image && PHOTOS[p.id] && (
+            <p className="mt-2 text-xs text-mute">
+              צילום: {PHOTOS[p.id].author}, {PHOTOS[p.id].license}, דרך{' '}
+              <a href={PHOTOS[p.id].url} target="_blank" rel="noreferrer" className="underline underline-offset-2">
+                Wikimedia Commons
+              </a>
+            </p>
+          )}
+          <div className={`mt-3 grid grid-cols-3 gap-3 ${p.image ? 'hidden' : ''}`}>
             {VIEWS.map((v, i) => (
               <button key={i} onClick={() => setView(i)} className={`relative aspect-[5/4] overflow-hidden rounded-2xl border bg-stage transition ${view === i ? 'border-ink ring-2 ring-ink/10' : 'border-line hover:border-ink'}`} aria-label={`תצוגה ${i + 1}`}>
                 <div className="absolute inset-0" style={{ background: v }} />

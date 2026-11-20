@@ -4,7 +4,7 @@ import { Lock, Truck, Store, Zap, CreditCard, CheckCircle2, Tag, ShoppingBag, Sm
 import { useStore } from '../context/StoreContext'
 import { formatPrice } from '../data/products'
 import { BRANCHES, SITE } from '../data/site'
-import ProductArt from '../components/ProductArt'
+import ProductMedia from '../components/ProductMedia'
 import { Qty } from '../components/CartDrawer'
 
 type Delivery = 'home' | 'express' | 'pickup'
@@ -180,7 +180,7 @@ export default function Checkout() {
               {items.map(({ product: p, qty }) => (
                 <li key={p.id} className="flex items-center gap-3">
                   <span className="h-14 w-16 shrink-0 rounded-lg bg-stage">
-                    <ProductArt id={`co-${p.id}`} kind={p.art} hue={p.hue} label={p.label} className="h-full w-full p-1" />
+                    <ProductMedia p={p} id={`co-${p.id}`} className="h-full w-full p-1" />
                   </span>
                   <span className="min-w-0 flex-1">
                     <span className="line-clamp-1 text-sm font-semibold">{p.name}</span>

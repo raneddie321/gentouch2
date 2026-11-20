@@ -1,4 +1,5 @@
 import type { CategoryId } from './categories'
+import { photoOf } from './photos'
 
 // Simulated catalog modeled on Dominator's product range. Prices are illustrative.
 
@@ -42,6 +43,7 @@ export type Product = {
   art: ArtKind
   hue: string
   label?: string
+  image?: string
   badges: Badge[]
   fastShip: boolean
   officialWarranty: boolean
@@ -65,6 +67,7 @@ const p = (s: Seed): Product => {
     badges: [],
     specs: [],
     ...s,
+    image: photoOf(s.id),
   }
 }
 
@@ -79,12 +82,12 @@ export const PRODUCTS: Product[] = [
   p({ id: 'xbox-series-x', name: 'Xbox Series X 1TB', brand: 'Microsoft', category: 'consoles', sub: 'xbox', price: 2399, art: 'console-box', hue: '#1F2937', short: '12 טרהפלופס, 4K 120FPS ו-Quick Resume לכמה משחקים במקביל.', specs: [['אחסון', '1TB SSD'], ['רזולוציה', '4K 120Hz'], ['אחריות', 'שנה יבואן רשמי']] }),
   p({ id: 'xbox-series-s', name: 'Xbox Series S 512GB', brand: 'Microsoft', category: 'consoles', sub: 'xbox', price: 1399, oldPrice: 1549, art: 'console-box', hue: '#F3F4F6', badges: ['sale'], short: 'הקונסולה הקומפקטית והמשתלמת לעולם ה-Game Pass.', specs: [['אחסון', '512GB SSD'], ['רזולוציה', '1440p 120Hz'], ['אחריות', 'שנה יבואן רשמי']] }),
   p({ id: 'ps-portal', name: 'PlayStation Portal', brand: 'Sony', category: 'consoles', sub: 'handheld', price: 949, art: 'handheld', hue: '#EEF1F7', label: 'PORTAL', short: 'שחקו ב-PS5 מכל מקום בבית עם מסך 8" ובקרי DualSense מובנים.', specs: [['מסך', '8" LCD 1080p'], ['חיבור', 'Remote Play WiFi']] }),
-  p({ id: 'rog-ally-x', name: 'ASUS ROG Ally X', brand: 'ASUS', category: 'consoles', sub: 'handheld', price: 3499, art: 'handheld', hue: '#1A1A1A', label: 'ROG', badges: ['new'], short: 'מחשב גיימינג בכף היד — Ryzen Z1 Extreme, 24GB ו-1TB.', specs: [['מעבד', 'Ryzen Z1 Extreme'], ['זיכרון', '24GB LPDDR5X'], ['אחסון', '1TB'], ['מסך', '7" 120Hz']] }),
+  p({ id: 'rog-ally-x', name: 'ASUS ROG Ally', brand: 'ASUS', category: 'consoles', sub: 'handheld', price: 2690, art: 'handheld', hue: '#1A1A1A', label: 'ROG', badges: ['new'], short: 'מחשב גיימינג בכף היד עם Ryzen Z1 Extreme ומסך 120Hz.', specs: [['מעבד', 'Ryzen Z1 Extreme'], ['זיכרון', '16GB LPDDR5'], ['אחסון', '512GB'], ['מסך', '7" 120Hz']] }),
   p({ id: 'psvr2', name: 'PlayStation VR2', brand: 'Sony', category: 'consoles', sub: 'vr', price: 1799, oldPrice: 2199, art: 'vr', hue: '#F2F4FA', badges: ['sale'], short: 'מציאות מדומה עם OLED 4K HDR, מעקב עיניים ובקרי Sense.', specs: [['תצוגה', 'OLED 2000×2040 לעין'], ['תאימות', 'PS5 / PC']] }),
   p({ id: 'quest-3', name: 'Meta Quest 3 512GB', brand: 'Meta', category: 'consoles', sub: 'vr', price: 2299, art: 'vr', hue: '#E5E7EB', short: 'משקפי מציאות מעורבת עצמאיים עם Passthrough צבעוני.', specs: [['אחסון', '512GB'], ['מעבד', 'Snapdragon XR2 Gen 2']] }),
   p({ id: 'dualsense-edge', name: 'בקר DualSense Edge', brand: 'Sony', category: 'consoles', sub: 'controllers', price: 899, art: 'controller', hue: '#F5F7FB', badges: ['hot'], short: 'בקר פרו עם סטיקים מתחלפים, כפתורים אחוריים ופרופילים.', specs: [['חיבור', 'אלחוטי / USB-C'], ['תאימות', 'PS5, PC']] }),
   p({ id: 'dualsense-black', name: 'בקר DualSense Midnight Black', brand: 'Sony', category: 'consoles', sub: 'controllers', price: 299, oldPrice: 349, art: 'controller', hue: '#2A2D36', badges: ['sale'], short: 'משוב הפטי ו-Adaptive Triggers בצבע שחור לילה.', specs: [['חיבור', 'אלחוטי'], ['תאימות', 'PS5, PC']] }),
-  p({ id: 'switch2-pro', name: 'Nintendo Switch 2 Pro Controller', brand: 'Nintendo', category: 'consoles', sub: 'controllers', price: 369, art: 'controller', hue: '#3A3F4B', short: 'בקר פרו עם כפתורי GL/GR וכפתור C לצ׳אט.', specs: [['חיבור', 'Bluetooth / USB-C'], ['סוללה', 'עד 40 שעות']] }),
+  p({ id: 'switch2-pro', name: 'Nintendo Switch Pro Controller', brand: 'Nintendo', category: 'consoles', sub: 'controllers', price: 289, art: 'controller', hue: '#3A3F4B', short: 'הבקר המקצועי של נינטנדו, תואם Switch ו-Switch 2, עם סוללה ל-40 שעות.', specs: [['חיבור', 'Bluetooth / USB-C'], ['סוללה', 'עד 40 שעות'], ['תאימות', 'Switch, Switch 2']] }),
   p({ id: 'xbox-controller', name: 'בקר Xbox Wireless — Carbon Black', brand: 'Microsoft', category: 'consoles', sub: 'controllers', price: 269, art: 'controller', hue: '#1F2329', short: 'הבקר הקלאסי של Xbox, תואם PC, מובייל ו-Xbox.', specs: [['חיבור', 'Xbox Wireless / Bluetooth']] }),
   p({ id: 'pulse-elite', name: 'אוזניות PlayStation Pulse Elite', brand: 'Sony', category: 'consoles', sub: 'audio', price: 599, art: 'headset', hue: '#F2F4FA', short: 'שמע Planar Magnetic, PlayStation Link וחיבור Bluetooth.', specs: [['חיבור', 'PS Link / Bluetooth'], ['סוללה', 'עד 30 שעות']] }),
   p({ id: 'arctis-nova-7', name: 'SteelSeries Arctis Nova 7', brand: 'SteelSeries', category: 'consoles', sub: 'audio', price: 729, art: 'headset', hue: '#2E3340', short: 'אלחוטיות עם חיבור כפול 2.4GHz + Bluetooth במקביל.', specs: [['חיבור', '2.4GHz + BT'], ['סוללה', '38 שעות']] }),
@@ -99,9 +102,9 @@ export const PRODUCTS: Product[] = [
   p({ id: 'odyssey-oled', name: 'Samsung Odyssey OLED G6 27" 360Hz', brand: 'Samsung', category: 'pcs', sub: 'monitors', price: 3290, art: 'monitor', hue: '#7C5CFF', badges: ['hot'], short: 'QD-OLED 1440p עם 360Hz וזמן תגובה 0.03ms.', specs: [['פאנל', 'QD-OLED'], ['רזולוציה', '2560×1440'], ['קצב רענון', '360Hz']] }),
   p({ id: 'lg-ultragear', name: 'LG UltraGear 27" 180Hz IPS', brand: 'LG', category: 'pcs', sub: 'monitors', price: 899, oldPrice: 1049, art: 'monitor', hue: '#FF4D2E', badges: ['sale'], short: 'מסך QHD מהיר במחיר שפשוט אי אפשר לפספס.', specs: [['פאנל', 'IPS'], ['רזולוציה', '2560×1440'], ['קצב רענון', '180Hz']] }),
   p({ id: 'gpx-superlight-2', name: 'Logitech G Pro X Superlight 2', brand: 'Logitech', category: 'pcs', sub: 'peripherals', price: 599, art: 'mouse', hue: '#F5F5F5', short: 'עכבר eSports אלחוטי במשקל 60 גרם בלבד.', specs: [['חיישן', 'HERO 2 32K'], ['משקל', '60g']] }),
-  p({ id: 'blackwidow-v4', name: 'Razer BlackWidow V4 Pro', brand: 'Razer', category: 'pcs', sub: 'peripherals', price: 749, art: 'keyboard', hue: '#39E81B', short: 'מקלדת מכנית עם חיוג מולטימדיה ו-Chroma RGB.', specs: [['מתגים', 'Razer Green'], ['תאורה', 'Chroma RGB']] }),
-  p({ id: 'apex-pro-tkl', name: 'SteelSeries Apex Pro TKL Gen 3', brand: 'SteelSeries', category: 'pcs', sub: 'peripherals', price: 899, art: 'keyboard', hue: '#FF4D2E', badges: ['new'], short: 'מתגים מגנטיים מתכווננים ו-Rapid Trigger.', specs: [['מתגים', 'OmniPoint 3.0'], ['פורמט', 'TKL']] }),
-  p({ id: 'secretlab-titan', name: 'כיסא Secretlab Titan Evo', brand: 'Secretlab', category: 'pcs', sub: 'chairs', price: 2190, art: 'chair', hue: '#FF4D2E', short: 'הכיסא האהוב על הסטרימרים — תמיכה מגנטית וכרית גב מובנית.', specs: [['ריפוד', 'NEO Hybrid Leatherette'], ['עומס מרבי', '130 ק״ג']] }),
+  p({ id: 'blackwidow-v4', name: 'Razer BlackWidow', brand: 'Razer', category: 'pcs', sub: 'peripherals', price: 749, art: 'keyboard', hue: '#39E81B', short: 'מקלדת מכנית עם חיוג מולטימדיה ו-Chroma RGB.', specs: [['מתגים', 'Razer Green'], ['תאורה', 'Chroma RGB']] }),
+  p({ id: 'apex-pro-tkl', name: 'SteelSeries Apex 5', brand: 'SteelSeries', category: 'pcs', sub: 'peripherals', price: 549, art: 'keyboard', hue: '#FF4D2E', short: 'מקלדת היברידית-מכנית עם מסך OLED קטן ותאורת RGB לכל מקש.', specs: [['מתגים', 'היברידי-מכני'], ['פורמט', 'מלא עם משענת'], ['תאורה', 'RGB לכל מקש']] }),
+  p({ id: 'secretlab-titan', name: 'כיסא גיימינג Racer אדום-שחור', brand: 'Dominator', category: 'pcs', sub: 'chairs', price: 899, art: 'chair', hue: '#FF4D2E', short: 'כיסא בסגנון מושב מרוץ עם כרית צוואר, כרית גב תחתון ומשענות ידיים מתכווננות.', specs: [['ריפוד', 'דמוי עור'], ['הטיית גב', 'עד 155°'], ['עומס מרבי', '120 ק״ג']] }),
   p({ id: 'cloud-iii', name: 'HyperX Cloud III', brand: 'HyperX', category: 'pcs', sub: 'peripherals', price: 399, art: 'headset', hue: '#FF2E2E', short: 'אוזניות חוטיות נוחות במיוחד עם סאונד מרחבי DTS.', specs: [['חיבור', 'USB / 3.5mm'], ['מיקרופון', 'נשלף']] }),
 
   // ───────────── Games
@@ -121,7 +124,7 @@ export const PRODUCTS: Product[] = [
   p({ id: 't300', name: 'Thrustmaster T300 RS GT', brand: 'Thrustmaster', category: 'sims', sub: 'wheels', price: 1690, art: 'wheel', hue: '#B91C1C', short: 'מנוע Brushless ורצועה שקטה — הצעד הבא לסים אמיתי.', specs: [['תאימות', 'PS5, PS4, PC'], ['סיבוב', '1080°']] }),
   p({ id: 'csl-dd', name: 'Fanatec CSL DD 8Nm — Bundle', brand: 'Fanatec', category: 'sims', sub: 'wheels', price: 3290, art: 'wheel', hue: '#111827', badges: ['exclusive'], short: 'Direct Drive אמיתי עם 8Nm, הגה ודוושות.', specs: [['מומנט', '8Nm'], ['תאימות', 'PC / Xbox']] }),
   p({ id: 'moza-r5', name: 'MOZA R5 Bundle', brand: 'MOZA', category: 'sims', sub: 'wheels', price: 2290, art: 'wheel', hue: '#2B6BFF', badges: ['new'], short: 'בסיס Direct Drive 5.5Nm, הגה ES ודוושות SR-P Lite.', specs: [['מומנט', '5.5Nm'], ['תאימות', 'PC']] }),
-  p({ id: 'tlcm', name: 'דוושות Thrustmaster T-LCM', brand: 'Thrustmaster', category: 'sims', sub: 'pedals', price: 1190, art: 'pedals', hue: '#9CA3AF', short: 'דוושת בלם Load Cell מתכתית לשליטה מדויקת.', specs: [['בלם', 'Load Cell 100kg'], ['חומר', 'מתכת מלאה']] }),
+  p({ id: 'tlcm', name: 'דוושות Thrustmaster Ferrari GT', brand: 'Thrustmaster', category: 'sims', sub: 'pedals', price: 279, art: 'pedals', hue: '#9CA3AF', short: 'סט דוושות גז ובלם עם בסיס רחב ומשטח מונע החלקה.', specs: [['דוושות', 'גז ובלם'], ['תאימות', 'PC, PlayStation']] }),
   p({ id: 'gtlite', name: 'קוקפיט Next Level Racing GTLite', brand: 'Next Level Racing', category: 'sims', sub: 'cockpits', price: 1290, art: 'cockpit', hue: '#2E3340', short: 'קוקפיט מתקפל — נכנס לכל סלון ומתקפל תוך שניות.', specs: [['תאימות', 'כל ההגאים המובילים'], ['מתקפל', 'כן']] }),
   p({ id: 'playseat-trophy', name: 'Playseat Trophy', brand: 'Playseat', category: 'sims', sub: 'cockpits', price: 2890, art: 'cockpit', hue: '#FF4D2E', short: 'מושב בהשראת מכוניות GT, מתאים ל-Direct Drive.', specs: [['מסגרת', 'פלדה'], ['תאימות', 'DD עד 12Nm']] }),
   p({ id: 'dom-sim-rig', name: 'Dominator Pro Sim Rig — מערכת מלאה', brand: 'Dominator', category: 'sims', sub: 'cockpits', price: 12900, art: 'cockpit', hue: '#7C5CFF', badges: ['exclusive', 'preorder'], short: 'שלדת אלומיניום, Direct Drive 12Nm, מסך כפול והתקנה בבית.', specs: [['שלדה', 'פרופיל אלומיניום 80/40'], ['בסיס', 'DD 12Nm'], ['התקנה', 'כולל הרכבה בבית הלקוח']] }),
